@@ -73,7 +73,7 @@ public class SistemPenggajian {
                 System.out.println();
                 System.out.println("----------------     Menu     ---------------");
                 System.out.println("1. Hitung Gaji Karyawan");
-                System.out.println("2. Tampilkan Data");
+                System.out.println("2. Tampilkan Data Karyawan");
                 System.out.println("3. Cari Data");
                 System.out.println("4. Keluar");
                 System.out.print("Pilih menu : ");
