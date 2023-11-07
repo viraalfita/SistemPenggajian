@@ -17,28 +17,11 @@ public class SistemPenggajian {
         String GREEN = "\u001B[32m";
         String RED = "\u001B[31m";
 
-        // Bubble Sort untuk mengurutkan array username
-        for (int i = 0; i < username.length - 1; i++) {
-            for (int j = 0; j < username.length - i - 1; j++) {
-                if (username[j].compareToIgnoreCase(username[j + 1]) > 0) {
-                    // Tukar username
-                    String tempUsername = username[j];
-                    username[j] = username[j + 1];
-                    username[j + 1] = tempUsername;
-
-                    // Tukar password yang sesuai dengan username
-                    String tempPassword = password[j];
-                    password[j] = password[j + 1];
-                    password[j + 1] = tempPassword;
-                }
-            }
-        }
-
         boolean isValidLogin = false;
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
-        // Mencari username yang sesuai setelah Bubble Sort
+        // Login
         int loop = 0;
         while (loop < 3) {
             System.out.println("==================================");
@@ -49,7 +32,7 @@ public class SistemPenggajian {
             System.out.print("Masukkan password : ");
             inputPassword = scan.nextLine();
            
-            //loop ketika password salah
+            //Mengecek username dan password
             for (int i = 0; i < username.length; i++) {
                 if (username[i].equalsIgnoreCase(inputUsername) && password[i].equals(inputPassword)) {
                     isValidLogin = true;
