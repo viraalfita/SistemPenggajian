@@ -74,6 +74,8 @@ public class SistemPenggajian {
                 System.out.flush();
                 String Enter;
 
+                //dio
+
                 switch (pilihMenu) {
                     case "1":
                         System.out.print("Masukkan jumlah karyawan : ");
