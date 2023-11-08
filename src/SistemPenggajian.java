@@ -74,7 +74,6 @@ public class SistemPenggajian {
                 System.out.flush();
                 String Enter;
 
-                //dio
 
                 switch (pilihMenu) {
                     case "1":
