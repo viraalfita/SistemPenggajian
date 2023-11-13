@@ -19,7 +19,9 @@ public class SistemPenggajian {
 
         boolean isValidLogin = false;
         System.out.print("\033[H\033[2J");
-        System.out.flush();
+        System.out.flush(); 
+
+        
 
         // Login
         int loop = 0;
@@ -73,7 +75,6 @@ public class SistemPenggajian {
             System.out.flush();
             String Enter;
 
-            // dio
 
             switch (pilihMenu) {
                 case "1":
@@ -171,7 +172,7 @@ public class SistemPenggajian {
                         System.out.println();
                         System.out.println("Nama Karyawan : " + dataKaryawan[i][0]);
                         System.out.println("Alamat Karyawan : " + dataKaryawan[i][1]);
-                        int divisiIndex = Integer.parseInt(dataKaryawan[i][2]) - 1;
+                        int divisiIndex = Integer.parseInt(dataKaryawan[i][2]);
                         String divisi = "";
                         switch (divisiIndex) {
                             case 1:
