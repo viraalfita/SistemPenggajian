@@ -132,7 +132,7 @@ public class SistemPenggajian {
                         int jamLembur = scan.nextInt();
                         dataKaryawan[j][4] = String.valueOf(jamLembur); // Simpan jam lembur
 
-                        int divisiIndex = Integer.parseInt(dataKaryawan[j][2]) - 1;
+                        int divisiIndex = Integer.parseInt(dataKaryawan[j][2]);
                         int gajiPokok = gajiPokokLembur[divisiIndex][0];
                         int gajiLembur = gajiPokokLembur[divisiIndex][1];
                         int jmlGajiPokok = gajiPokok * hariKerja;
@@ -169,7 +169,7 @@ public class SistemPenggajian {
                         System.out.println();
                         System.out.println("Nama Karyawan : " + dataKaryawan[i][0]);
                         System.out.println("Alamat Karyawan : " + dataKaryawan[i][1]);
-                        int divisiIndex = Integer.parseInt(dataKaryawan[i][2]) - 1;
+                        int divisiIndex = Integer.parseInt(dataKaryawan[i][2]);
                         String divisi = "";
                         switch (divisiIndex) {
                             case 1:
