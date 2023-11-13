@@ -270,5 +270,3 @@ public class SistemPenggajian {
         scan.close();
     }
 }
-//tes
-//tesbranch
