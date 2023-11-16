@@ -7,8 +7,8 @@ public class SistemPenggajian {
         Scanner scan = new Scanner(System.in);
         NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
 
-        String[] username = { "viraalfita", "dioandika", "taufikdimas", "admin" };
-        String[] password = { "admin1", "admin2", "admin3", "admin" };
+        String[] username = { "user", "admin" };
+        String[] password = { "123", "admin" };
 
         String inputUsername, inputPassword;
         // Hiasan
@@ -54,8 +54,8 @@ public class SistemPenggajian {
         }
 
         int jumlahKaryawan = 0;
-        String[][] dataKaryawan = new String[jumlahKaryawan][5]; // Nama, Alamat, Divisi, Total Gaji, Jam Lembur
-        int[][] gajiPokokLembur = { { 80000, 12000 }, { 70000, 13000 }, { 60000, 10000 }, { 85000, 12000 } };
+        String[][] dataKaryawan = new String[jumlahKaryawan][10]; // Nama, Alamat, Divisi, Total Gaji, Jam Lembur
+        int[][] gajiPokokLembur = { { 2400000, 12000 }, { 1900000, 10000 }, { 2700000, 13000 }, { 3000000, 10000 }, { 85000, 12000 } };
         while (isValidLogin) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -129,8 +129,8 @@ public class SistemPenggajian {
                                 divisi = "";
                         }
                         System.out.println("Divisi               : " + divisi);
-                        System.out.print("Masukkan hari kerja  : ");
-                        int hariKerja = scan.nextInt();
+                        //System.out.print("Masukkan hari kerja  : ");
+                        //int hariKerja = scan.nextInt();
                         System.out.print("Masukkan jam lembur  : ");
                         int jamLembur = scan.nextInt();
                         dataKaryawan[j][4] = String.valueOf(jamLembur); // Simpan jam lembur
@@ -138,15 +138,14 @@ public class SistemPenggajian {
                         int divisiIndex = Integer.parseInt(dataKaryawan[j][2]) - 1;
                         int gajiPokok = gajiPokokLembur[divisiIndex][0];
                         int gajiLembur = gajiPokokLembur[divisiIndex][1];
-                        int jmlGajiPokok = gajiPokok * hariKerja;
+                        int jmlGajiPokok = gajiPokok ;
                         int jmlGajiLembur = gajiLembur * jamLembur;
 
                         int totalGaji = jmlGajiPokok + jmlGajiLembur;
 
                         dataKaryawan[j][3] = String.valueOf(totalGaji); // Simpan total gaji
                         System.out.println("");
-                        System.out.println("Gaji Pokok   : " + hariKerja + " x " + formatRupiah.format(gajiPokok)
-                                + " = " + formatRupiah.format(jmlGajiPokok));
+                        System.out.println("Gaji Pokok   : "  + formatRupiah.format(gajiPokok));
                         System.out.println("Gaji Lembur  : " + jamLembur + " x " + formatRupiah.format(gajiLembur)
                                 + " = " + formatRupiah.format(jmlGajiLembur));
                         System.out.println("__________________________________+");
@@ -192,8 +191,14 @@ public class SistemPenggajian {
                                 break;
                         }
                         System.out.println("Divisi Karyawan : " + divisi);
-                        // System.out.println("Total Gaji : " + dataKaryawan[i][3]);
-                        System.out.println();
+                        String gajiString = dataKaryawan[i][3];
+                            if (gajiString != null && !gajiString.isEmpty()) {
+                                int totalGaji = Integer.parseInt(gajiString);
+                                System.out.println("Gaji Bulan Ini  : " + formatRupiah.format(totalGaji));
+                            } else {
+                                System.out.println("Gaji Bulan Ini  : " + RED + "Belum ditentukan" + RESET);
+                            }
+                            System.out.println();
                     }
                     System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
                     Enter = scan.nextLine();
