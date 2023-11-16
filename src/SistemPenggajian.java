@@ -52,8 +52,10 @@ public class SistemPenggajian {
         }
 
         int jumlahKaryawan = 0;
-        String[][] dataKaryawan = new String[jumlahKaryawan][8]; // Nama, Alamat, Divisi, Total Gaji, Jam Lembur, Tahun
-                                                                 // periode, bulan periode
+        String[][] dataKaryawan = new String[jumlahKaryawan][12]; // Nama, Alamat, Divisi, Total Gaji, Jam Lembur,
+                                                                  // Hari kerja, Tahun periode, bulan periode, gender,
+                                                                  // nomer hp, email, id karyawan, tunjangan, potongan,
+                                                                  // pajak, gaji lembur, gaji bersih
         int[][] gajiPokokLembur = { { 2400000, 12000 }, { 1900000, 10000 }, { 2700000, 13000 }, { 3000000, 10000 },
                 { 3850000, 12000 } };
         int[] tunjanganMakanTransport = { 10000, 7000 }; // makan, transport
