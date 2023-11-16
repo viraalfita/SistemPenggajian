@@ -19,9 +19,7 @@ public class SistemPenggajian {
 
         boolean isValidLogin = false;
         System.out.print("\033[H\033[2J");
-        System.out.flush(); 
-
-        
+        System.out.flush();
 
         // Login
         int loop = 0;
@@ -54,8 +52,11 @@ public class SistemPenggajian {
         }
 
         int jumlahKaryawan = 0;
-        String[][] dataKaryawan = new String[jumlahKaryawan][10]; // Nama, Alamat, Divisi, Total Gaji, Jam Lembur
-        int[][] gajiPokokLembur = { { 2400000, 12000 }, { 1900000, 10000 }, { 2700000, 13000 }, { 3000000, 10000 }, { 3850000, 12000 } };
+        String[][] dataKaryawan = new String[jumlahKaryawan][8]; // Nama, Alamat, Divisi, Total Gaji, Jam Lembur, Tahun
+                                                                 // periode, bulan periode
+        int[][] gajiPokokLembur = { { 2400000, 12000 }, { 1900000, 10000 }, { 2700000, 13000 }, { 3000000, 10000 },
+                { 3850000, 12000 } };
+        int[] tunjanganMakanTransport = { 10000, 7000 }; // makan, transport
         while (isValidLogin) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -74,7 +75,6 @@ public class SistemPenggajian {
             System.out.print("\033[H\033[2J");
             System.out.flush();
             String Enter;
-
 
             switch (pilihMenu) {
                 case "1":
@@ -98,7 +98,7 @@ public class SistemPenggajian {
                         newDataKaryawan[i][0] = scan.nextLine();
                         System.out.print("Alamat  : ");
                         newDataKaryawan[i][1] = scan.nextLine();
-                        
+
                         System.out.println("==================================");
                         System.out.println(YELLOW + "               DIVISI  " + RESET);
                         System.out.println("==================================");
@@ -141,25 +141,80 @@ public class SistemPenggajian {
                                 divisi = "";
                         }
                         System.out.println("Divisi               : " + divisi);
-                        System.out.print("Masukkan jam lembur  : ");
+                        System.out.println();
+                        System.out.print("Masukkan periode tahun : ");
+                        int tahun = scan.nextInt();
+                        scan.nextLine();
+                        System.out.print("Masukkan periode bulan : ");
+                        String bulan = scan.nextLine();
+                        System.out.println();
+                        System.out.print("Masukkan jam lembur    : ");
                         int jamLembur = scan.nextInt();
+                        System.out.print("Masukkan hari kerja    : ");
+                        int hariKerja = scan.nextInt();
                         dataKaryawan[j][4] = String.valueOf(jamLembur); // Simpan jam lembur
 
+                        // perhitungan tunjangan
+                        System.out.println();
+                        System.out.println("-- Tunjangan --");
+                        int jmlTunjMakan = hariKerja * tunjanganMakanTransport[0];
+                        int jmlTunjTransport = hariKerja * tunjanganMakanTransport[1];
+                        int totalTunj = jmlTunjMakan + jmlTunjTransport;
+
+                        System.out.println("Tunjangan Makan      : " +
+                                formatRupiah.format(tunjanganMakanTransport[0])
+                                + " x " + hariKerja + " hari = " + jmlTunjMakan);
+                        System.out.println("Tunjangan Transport  : " +
+                                formatRupiah.format(tunjanganMakanTransport[1])
+                                + " x " + hariKerja + " hari = " + jmlTunjTransport);
+                        System.out.println("Total Tunjangan      : " + formatRupiah.format(totalTunj));
+
+                        // perhitungan potongan
+                        System.out.println();
+                        System.out.println("-- Potongan --");
+                        System.out.print("Masukkan jumlah terlambat : ");
+                        int terlambat = scan.nextInt();
+                        System.out.print("Masukkan jumlah alpa      : ");
+                        int alpa = scan.nextInt();
+                        int jmlTerlambat = terlambat * 1000;
+                        int jmlAlpa = alpa * 50000;
+                        int jmlPotongan = jmlAlpa + jmlTerlambat;
+                        System.out.println();
+                        System.out.println("Potongan terlambat  : " + terlambat + " x " + "Rp1.000 = " + jmlTerlambat);
+                        System.out.println("Potongan alpa       : " + alpa + " x " + "Rp50.000 = " + jmlAlpa);
+                        System.out.println("Total Potongan      : " + jmlPotongan);
+
+                        // perhitungan total gaji sebelum pajak
                         int divisiIndex = Integer.parseInt(dataKaryawan[j][2]) - 1;
                         int gajiPokok = gajiPokokLembur[divisiIndex][0];
                         int gajiLembur = gajiPokokLembur[divisiIndex][1];
-                        int jmlGajiPokok = gajiPokok ;
+                        int jmlGajiPokok = gajiPokok;
                         int jmlGajiLembur = gajiLembur * jamLembur;
 
-                        int totalGaji = jmlGajiPokok + jmlGajiLembur;
+                        int totalGaji = jmlGajiPokok + jmlGajiLembur + totalTunj - jmlPotongan;
 
                         dataKaryawan[j][3] = String.valueOf(totalGaji); // Simpan total gaji
                         System.out.println("");
-                        System.out.println("Gaji Pokok   : "  + formatRupiah.format(gajiPokok));
+                        System.out.println("Gaji Pokok   : " + formatRupiah.format(gajiPokok));
                         System.out.println("Gaji Lembur  : " + jamLembur + " x " + formatRupiah.format(gajiLembur)
                                 + " = " + formatRupiah.format(jmlGajiLembur));
+
+                        // perhitungan pajak
+                        System.out.println();
+                        System.out.println("-- Pajak --");
+                        double gajiSetelahPajak;
+                        if (totalGaji >= 3000000) {
+                            gajiSetelahPajak = totalGaji - (totalGaji * 0.05);
+
+                            System.out.println(
+                                    "Gaji karyawan setelah dipotong pajak : " + formatRupiah.format(gajiSetelahPajak));
+                        } else {
+                            gajiSetelahPajak = totalGaji - 0;
+                            System.out.println("Karyawan tidak dikenakan pajak penghasilan");
+                        }
+                        System.out.println();
                         System.out.println("__________________________________+");
-                        System.out.println("Total Gaji   : " + formatRupiah.format(totalGaji));
+                        System.out.println("Gaji yang diterima  : " + formatRupiah.format(gajiSetelahPajak));
                         System.out.println("==================================");
                         System.out.println();
                         scan.nextLine();
@@ -202,13 +257,13 @@ public class SistemPenggajian {
                         }
                         System.out.println("Divisi Karyawan : " + divisi);
                         String gajiString = dataKaryawan[i][3];
-                            if (gajiString != null && !gajiString.isEmpty()) {
-                                int totalGaji = Integer.parseInt(gajiString);
-                                System.out.println("Gaji Bulan Ini  : " + formatRupiah.format(totalGaji));
-                            } else {
-                                System.out.println("Gaji Bulan Ini  : " + RED + "Belum ditentukan" + RESET);
-                            }
-                            System.out.println();
+                        if (gajiString != null && !gajiString.isEmpty()) {
+                            int totalGaji = Integer.parseInt(gajiString);
+                            System.out.println("Gaji Bulan Ini  : " + formatRupiah.format(totalGaji));
+                        } else {
+                            System.out.println("Gaji Bulan Ini  : " + RED + "Belum ditentukan" + RESET);
+                        }
+                        System.out.println();
                     }
                     System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
                     Enter = scan.nextLine();
