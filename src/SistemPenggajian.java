@@ -78,18 +78,26 @@ public class SistemPenggajian {
 
             switch (pilihMenu) {
                 case "1":
-                    System.out.print("Masukkan jumlah karyawan : ");
-                    jumlahKaryawan = scan.nextInt();
-                    dataKaryawan = new String[jumlahKaryawan][5]; // Nama, Alamat, Divisi, Total Gaji, Jam Lembur
+                    System.out.print("Masukkan jumlah karyawan baru : ");
+                    int jumlahKaryawanBaru = scan.nextInt();
                     scan.nextLine();
 
+                    // Create a temporary array to store the new data
+                    String[][] newDataKaryawan = new String[jumlahKaryawan + jumlahKaryawanBaru][5];
+
+                    // Copy existing data to the temporary array
                     for (int i = 0; i < jumlahKaryawan; i++) {
+                        System.arraycopy(dataKaryawan[i], 0, newDataKaryawan[i], 0, 5);
+                    }
+
+                    // Input new data
+                    for (int i = jumlahKaryawan; i < jumlahKaryawan + jumlahKaryawanBaru; i++) {
                         System.out.println("");
                         System.out.println("Karyawan ke - " + (i + 1));
                         System.out.print("Nama    : ");
-                        dataKaryawan[i][0] = scan.nextLine();
+                        newDataKaryawan[i][0] = scan.nextLine();
                         System.out.print("Alamat  : ");
-                        dataKaryawan[i][1] = scan.nextLine();
+                        newDataKaryawan[i][1] = scan.nextLine();
                         System.out.println("==================================");
                         System.out.println(YELLOW + "               DIVISI  " + RESET);
                         System.out.println("==================================");
@@ -98,10 +106,13 @@ public class SistemPenggajian {
                         System.out.println("3. Food and Beverage Service");
                         System.out.println("4. Administrasi");
                         System.out.print("Masukkan kategori divisi anda : ");
-                        dataKaryawan[i][2] = String.valueOf(scan.nextInt());
-
+                        newDataKaryawan[i][2] = String.valueOf(scan.nextInt());
                         scan.nextLine();
                     }
+
+                    // Update the main array with the new data
+                    dataKaryawan = newDataKaryawan;
+                    jumlahKaryawan += jumlahKaryawanBaru;
                     break;
                 case "4":
                     System.out.println("==================================");
