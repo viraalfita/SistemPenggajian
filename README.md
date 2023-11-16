@@ -1,18 +1,7 @@
-## Getting Started
+<h2>Selamat datang di Sistem Penggajian Berbasis CLI untuk Industri Hotel! 🏨</h2>
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+<h5>Projek ini dirancang untuk memudahkan perhitungan gaji karyawan hotel secara efisien. Dengan antarmuka berbasis Command Line Interface (CLI), Anda dapat dengan mudah mengakses fitur-fitur canggih yang disediakan, menjadikan pengelolaan penggajian lebih sederhana dan efektif.
 
-## Folder Structure
+Fitur menarik yang tersedia meliputi perhitungan gaji yang akurat berdasarkan kategori pekerjaan, kemampuan untuk menangani tunjangan dan bonus, serta laporan penggajian yang terstruktur. Sistem ini dikembangkan untuk memberikan pengalaman pengguna yang intuitif dan meminimalkan kerumitan dalam proses administratif penggajian.
 
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Mari jelajahi dunia kemudahan dan efisiensi dengan Sistem Penggajian CLI ini. Instruksi penggunaan dapat ditemukan di bawah ini untuk memastikan penggunaan yang lancar dan optimal. Terima kasih telah memilih solusi kami! 💼💰</h5>
