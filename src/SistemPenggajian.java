@@ -129,8 +129,6 @@ public class SistemPenggajian {
                                 divisi = "";
                         }
                         System.out.println("Divisi               : " + divisi);
-                        //System.out.print("Masukkan hari kerja  : ");
-                        //int hariKerja = scan.nextInt();
                         System.out.print("Masukkan jam lembur  : ");
                         int jamLembur = scan.nextInt();
                         dataKaryawan[j][4] = String.valueOf(jamLembur); // Simpan jam lembur
