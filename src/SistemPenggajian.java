@@ -192,8 +192,14 @@ public class SistemPenggajian {
                                 break;
                         }
                         System.out.println("Divisi Karyawan : " + divisi);
-                        // System.out.println("Total Gaji : " + dataKaryawan[i][3]);
-                        System.out.println();
+                        String gajiString = dataKaryawan[i][3];
+                            if (gajiString != null && !gajiString.isEmpty()) {
+                                int totalGaji = Integer.parseInt(gajiString);
+                                System.out.println("Gaji Bulan Ini  : " + formatRupiah.format(totalGaji));
+                            } else {
+                                System.out.println("Gaji Bulan Ini  : " + RED + "Belum ditentukan" + RESET);
+                            }
+                            System.out.println();
                     }
                     System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
                     Enter = scan.nextLine();
