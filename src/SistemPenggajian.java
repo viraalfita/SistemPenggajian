@@ -7,8 +7,8 @@ public class SistemPenggajian {
         Scanner scan = new Scanner(System.in);
         NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
 
-        String[] username = { "viraalfita", "dioandika", "taufikdimas", "admin" };
-        String[] password = { "admin1", "admin2", "admin3", "admin" };
+        String[] username = { "user", "admin" };
+        String[] password = { "123", "admin" };
 
         String inputUsername, inputPassword;
         // Hiasan
@@ -54,8 +54,8 @@ public class SistemPenggajian {
         }
 
         int jumlahKaryawan = 0;
-        String[][] dataKaryawan = new String[jumlahKaryawan][5]; // Nama, Alamat, Divisi, Total Gaji, Jam Lembur
-        int[][] gajiPokokLembur = { { 80000, 12000 }, { 70000, 13000 }, { 60000, 10000 }, { 85000, 12000 } };
+        String[][] dataKaryawan = new String[jumlahKaryawan][10]; // Nama, Alamat, Divisi, Total Gaji, Jam Lembur
+        int[][] gajiPokokLembur = { { 2400000, 12000 }, { 1900000, 10000 }, { 2700000, 13000 }, { 3000000, 10000 }, { 3850000, 12000 } };
         while (isValidLogin) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
@@ -78,18 +78,27 @@ public class SistemPenggajian {
 
             switch (pilihMenu) {
                 case "1":
-                    System.out.print("Masukkan jumlah karyawan : ");
-                    jumlahKaryawan = scan.nextInt();
-                    dataKaryawan = new String[jumlahKaryawan][5]; // Nama, Alamat, Divisi, Total Gaji, Jam Lembur
+                    System.out.print("Masukkan jumlah karyawan baru : ");
+                    int jumlahKaryawanBaru = scan.nextInt();
                     scan.nextLine();
 
+                    // Create a temporary array to store the new data
+                    String[][] newDataKaryawan = new String[jumlahKaryawan + jumlahKaryawanBaru][5];
+
+                    // Copy existing data to the temporary array
                     for (int i = 0; i < jumlahKaryawan; i++) {
+                        System.arraycopy(dataKaryawan[i], 0, newDataKaryawan[i], 0, 5);
+                    }
+
+                    // Input new data
+                    for (int i = jumlahKaryawan; i < jumlahKaryawan + jumlahKaryawanBaru; i++) {
                         System.out.println("");
                         System.out.println("Karyawan ke - " + (i + 1));
                         System.out.print("Nama    : ");
-                        dataKaryawan[i][0] = scan.nextLine();
+                        newDataKaryawan[i][0] = scan.nextLine();
                         System.out.print("Alamat  : ");
-                        dataKaryawan[i][1] = scan.nextLine();
+                        newDataKaryawan[i][1] = scan.nextLine();
+                        
                         System.out.println("==================================");
                         System.out.println(YELLOW + "               DIVISI  " + RESET);
                         System.out.println("==================================");
@@ -98,10 +107,13 @@ public class SistemPenggajian {
                         System.out.println("3. Food and Beverage Service");
                         System.out.println("4. Administrasi");
                         System.out.print("Masukkan kategori divisi anda : ");
-                        dataKaryawan[i][2] = String.valueOf(scan.nextInt());
-
+                        newDataKaryawan[i][2] = String.valueOf(scan.nextInt());
                         scan.nextLine();
                     }
+
+                    // Update the main array with the new data
+                    dataKaryawan = newDataKaryawan;
+                    jumlahKaryawan += jumlahKaryawanBaru;
                     break;
                 case "4":
                     System.out.println("==================================");
@@ -129,8 +141,6 @@ public class SistemPenggajian {
                                 divisi = "";
                         }
                         System.out.println("Divisi               : " + divisi);
-                        System.out.print("Masukkan hari kerja  : ");
-                        int hariKerja = scan.nextInt();
                         System.out.print("Masukkan jam lembur  : ");
                         int jamLembur = scan.nextInt();
                         dataKaryawan[j][4] = String.valueOf(jamLembur); // Simpan jam lembur
@@ -138,15 +148,14 @@ public class SistemPenggajian {
                         int divisiIndex = Integer.parseInt(dataKaryawan[j][2]) - 1;
                         int gajiPokok = gajiPokokLembur[divisiIndex][0];
                         int gajiLembur = gajiPokokLembur[divisiIndex][1];
-                        int jmlGajiPokok = gajiPokok * hariKerja;
+                        int jmlGajiPokok = gajiPokok ;
                         int jmlGajiLembur = gajiLembur * jamLembur;
 
                         int totalGaji = jmlGajiPokok + jmlGajiLembur;
 
                         dataKaryawan[j][3] = String.valueOf(totalGaji); // Simpan total gaji
                         System.out.println("");
-                        System.out.println("Gaji Pokok   : " + hariKerja + " x " + formatRupiah.format(gajiPokok)
-                                + " = " + formatRupiah.format(jmlGajiPokok));
+                        System.out.println("Gaji Pokok   : "  + formatRupiah.format(gajiPokok));
                         System.out.println("Gaji Lembur  : " + jamLembur + " x " + formatRupiah.format(gajiLembur)
                                 + " = " + formatRupiah.format(jmlGajiLembur));
                         System.out.println("__________________________________+");
