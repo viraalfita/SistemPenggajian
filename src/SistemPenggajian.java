@@ -343,13 +343,6 @@ public class SistemPenggajian {
                                     break;
                             }
                             System.out.println("Divisi Karyawan : " + divisi);
-                            // String gajiString = dataKaryawan[j][3];
-                            // if (gajiString != null && !gajiString.isEmpty()) {
-                            // int totalGaji = Integer.parseInt(gajiString);
-                            // System.out.println("Gaji Bulan Ini : " + formatRupiah.format(totalGaji));
-                            // } else {
-                            // System.out.println("Gaji Bulan Ini : " + RED + "Belum ditentukan" + RESET);
-                            // }
                             System.out.println();
                             int[] gaji1 = gajiKaryawan.get(0); // Dapatkan array untuk karyawan saat ini
 
