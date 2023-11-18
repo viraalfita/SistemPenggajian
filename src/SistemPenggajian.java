@@ -61,8 +61,8 @@ public class SistemPenggajian {
         }
 
         int jumlahKaryawan = 0;
-        String[][] dataKaryawan = new String[jumlahKaryawan][7]; // Nama, Alamat, Divisi, gender,
-                                                                 // nomer hp, email, id karyawan
+        String[][] dataKaryawan = new String[jumlahKaryawan][7];// Nama0, id karyawan1, Jabatan2, Email3,Alamat4, No.hp5
+
         ArrayList<int[]> gajiKaryawan = new ArrayList<>();
         int[][] gajiPokokLembur = { { 2400000, 12000 }, { 1900000, 10000 }, { 2700000, 13000 }, { 3000000, 10000 },
                 { 3850000, 12000 } };
@@ -225,7 +225,8 @@ public class SistemPenggajian {
 
                         int totalGaji = jmlGajiPokok + jmlGajiLembur + totalTunj - jmlPotongan;
 
-                        dataKaryawan[j][3] = String.valueOf(totalGaji); // Simpan total gaji
+                        dataKaryawan[j][6] = String.valueOf(totalGaji); // Simpan total gaji
+
                         System.out.println("");
                         System.out.println("-- Gaji pokok dan lembur --");
                         System.out.println("Gaji Pokok   : " + formatRupiah.format(gajiPokok));
@@ -327,8 +328,11 @@ public class SistemPenggajian {
                         if (dataKaryawan[j][0].equalsIgnoreCase(cariNama)) {
                             ditemukan = true;
                             System.out.println("\nKaryawan dengan nama " + cariNama + " ditemukan:");
-                            System.out.println("Nama    : " + dataKaryawan[j][0]);
-                            System.out.println("Alamat    : " + dataKaryawan[j][1]);
+                            System.out.println("Nama           : " + dataKaryawan[j][0]);
+                            System.out.println("ID Karyawan    : " + dataKaryawan[j][1]);
+                            System.out.println("Email          : " + dataKaryawan[j][3]);
+                            System.out.println("Alamat         : " + dataKaryawan[j][4]);
+                            System.out.println("No. HP         : " + dataKaryawan[j][5]);
                             String divisi = "";
                             switch (Integer.parseInt(dataKaryawan[j][2])) {
                                 case 1:
@@ -349,75 +353,82 @@ public class SistemPenggajian {
                             }
                             System.out.println("Divisi Karyawan : " + divisi);
                             System.out.println();
-                            int[] gaji1 = gajiKaryawan.get(0); // Dapatkan array untuk karyawan saat ini
+                            String gajiAkhir = dataKaryawan[j][6];
+                            if (gajiAkhir != null && !gajiAkhir.isEmpty()) {
+                                int[] gaji1 = gajiKaryawan.get(0); // Dapatkan array untuk karyawan saat ini
+                                int periodeTahun = gaji1[0];
+                                int periodeBulan = gaji1[1];
+                                int jamLembur = gaji1[2];
+                                int hariKerja = gaji1[3];
 
-                            int periodeTahun = gaji1[0];
-                            int periodeBulan = gaji1[1];
-                            int jamLembur = gaji1[2];
-                            int hariKerja = gaji1[3];
+                                System.out.println();
+                                System.out.println("-- Periode --");
+                                System.out.println("Periode tahun       : " + periodeTahun);
+                                System.out.println("Periode bulan       : " + periodeBulan);
+                                System.out.println();
+                                System.out.println("-- Hari kerja dan jam lembur --");
+                                System.out.println("Jam lembur          : " + jamLembur + " jam");
+                                System.out.println("Hari kerja          : " + hariKerja + " hari");
 
-                            System.out.println();
-                            System.out.println("-- Periode --");
-                            System.out.println("Periode tahun       : " + periodeTahun);
-                            System.out.println("Periode bulan       : " + periodeBulan);
-                            System.out.println();
-                            System.out.println("-- Hari kerja dan jam lembur --");
-                            System.out.println("Jam lembur          : " + jamLembur + " jam");
-                            System.out.println("Hari kerja          : " + hariKerja + " hari");
+                                int[] gaji2 = gajiKaryawan.get(1);
 
-                            int[] gaji2 = gajiKaryawan.get(1);
+                                int jmlTunjMakan = gaji2[0];
+                                int jmlTunjTransport = gaji2[1];
+                                int totalTunj = gaji2[2];
+                                System.out.println();
+                                System.out.println("-- Tunjangan --");
+                                System.out.println("Tunjangan makan     : " + formatRupiah.format(jmlTunjMakan));
+                                System.out
+                                        .println("Tunjangan transport : " + formatRupiah.format(jmlTunjTransport));
+                                System.out.println("Total tunjangan     : " + formatRupiah.format(totalTunj));
 
-                            int jmlTunjMakan = gaji2[0];
-                            int jmlTunjTransport = gaji2[1];
-                            int totalTunj = gaji2[2];
-                            System.out.println();
-                            System.out.println("-- Tunjangan --");
-                            System.out.println("Tunjangan makan     : " + formatRupiah.format(jmlTunjMakan));
-                            System.out
-                                    .println("Tunjangan transport : " + formatRupiah.format(jmlTunjTransport));
-                            System.out.println("Total tunjangan     : " + formatRupiah.format(totalTunj));
+                                int[] gaji3 = gajiKaryawan.get(2);
 
-                            int[] gaji3 = gajiKaryawan.get(2);
+                                int terlambat = gaji3[0];
+                                int alpa = gaji3[1];
+                                int jmlTerlambat = gaji3[2];
+                                int jmlAlpa = gaji3[3];
+                                int jmlPotongan = gaji3[4];
+                                System.out.println();
+                                System.out.println("-- Potongan --");
+                                System.out.println("Terlambat         : " + terlambat + " menit");
+                                System.out.println("Alpa              : " + alpa + " hari");
+                                System.out.println("Total terlambat   : " + formatRupiah.format(jmlTerlambat));
+                                System.out.println("Total alpa        : " + formatRupiah.format(jmlAlpa));
+                                System.out.println("Total potongan    : " + formatRupiah.format(jmlPotongan));
 
-                            int terlambat = gaji3[0];
-                            int alpa = gaji3[1];
-                            int jmlTerlambat = gaji3[2];
-                            int jmlAlpa = gaji3[3];
-                            int jmlPotongan = gaji3[4];
-                            System.out.println();
-                            System.out.println("-- Potongan --");
-                            System.out.println("Terlambat         : " + terlambat + " menit");
-                            System.out.println("Alpa              : " + alpa + " hari");
-                            System.out.println("Total terlambat   : " + formatRupiah.format(jmlTerlambat));
-                            System.out.println("Total alpa        : " + formatRupiah.format(jmlAlpa));
-                            System.out.println("Total potongan    : " + formatRupiah.format(jmlPotongan));
+                                int[] gaji4 = gajiKaryawan.get(3);
 
-                            int[] gaji4 = gajiKaryawan.get(3);
+                                int jmlGajiPokok = gaji4[0];
+                                int jmlGajiLembur = gaji4[1];
+                                int totalGaji = gaji4[2];
 
-                            int jmlGajiPokok = gaji4[0];
-                            int jmlGajiLembur = gaji4[1];
-                            int totalGaji = gaji4[2];
+                                System.out.println();
+                                System.out.println("-- Gaji pokok dan lembur --");
+                                System.out
+                                        .println("Jumlah gaji pokok           : " + formatRupiah.format(jmlGajiPokok));
+                                System.out
+                                        .println("Jumlah gaji lembur          : " + formatRupiah.format(jmlGajiLembur));
+                                System.out.println("Total gaji pokok dan lembur : " + formatRupiah.format(totalGaji));
 
-                            System.out.println();
-                            System.out.println("-- Gaji pokok dan lembur --");
-                            System.out.println("Jumlah gaji pokok           : " + formatRupiah.format(jmlGajiPokok));
-                            System.out.println("Jumlah gaji lembur          : " + formatRupiah.format(jmlGajiLembur));
-                            System.out.println("Total gaji pokok dan lembur : " + formatRupiah.format(totalGaji));
+                                int[] gaji5 = gajiKaryawan.get(4);
 
-                            int[] gaji5 = gajiKaryawan.get(4);
+                                int gajiSetelahPajak = gaji5[0];
+                                int potonganPajak = gaji5[1];
 
-                            int gajiSetelahPajak = gaji5[0];
-                            int potonganPajak = gaji5[1];
+                                System.out.println();
+                                System.out.println("-- Pajak --");
+                                System.out.println("Potongan pajak     : " + formatRupiah.format(potonganPajak));
+                                System.out.println("Gaji setelah pajak : " + formatRupiah.format(gajiSetelahPajak));
 
-                            System.out.println();
-                            System.out.println("-- Pajak --");
-                            System.out.println("Potongan pajak     : " + formatRupiah.format(potonganPajak));
-                            System.out.println("Gaji setelah pajak : " + formatRupiah.format(gajiSetelahPajak));
-
-                            System.out.println();
-                            System.out.println("__________________________________________");
-                            System.out.println("Gaji yang diterima  : " + formatRupiah.format(gajiSetelahPajak));
-                            System.out.println("==========================================");
+                                System.out.println();
+                                System.out.println("__________________________________________");
+                                System.out.println("Gaji yang diterima  : " + formatRupiah.format(gajiSetelahPajak));
+                                System.out.println("==========================================");
+                                System.out.println();
+                            } else {
+                                System.out.println("Gaji Bulan Ini  : " + RED + "Belum ditentukan" + RESET);
+                            }
                             System.out.println();
 
                             break;
