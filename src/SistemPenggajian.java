@@ -4,6 +4,14 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class SistemPenggajian {
+
+    /*
+     * static String[][] bioKaryawan = {
+     * { "Taufik Dimas", "23417200620", "Manajer", "dimas@.com", "Kota Blitar",
+     * "085730760115" }
+     * };
+     */
+
     public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
         NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
@@ -85,21 +93,27 @@ public class SistemPenggajian {
                     scan.nextLine();
 
                     // Create a temporary array to store the new data
-                    String[][] newDataKaryawan = new String[jumlahKaryawan + jumlahKaryawanBaru][5];
+                    String[][] newDataKaryawan = new String[jumlahKaryawan + jumlahKaryawanBaru][7];
 
                     // Copy existing data to the temporary array
                     for (int i = 0; i < jumlahKaryawan; i++) {
-                        System.arraycopy(dataKaryawan[i], 0, newDataKaryawan[i], 0, 5);
+                        System.arraycopy(dataKaryawan[i], 0, newDataKaryawan[i], 0, 7);
                     }
 
                     // Input new data
                     for (int i = jumlahKaryawan; i < jumlahKaryawan + jumlahKaryawanBaru; i++) {
                         System.out.println("");
                         System.out.println("Karyawan ke - " + (i + 1));
-                        System.out.print("Nama    : ");
+                        System.out.print("Nama        : ");
                         newDataKaryawan[i][0] = scan.nextLine();
-                        System.out.print("Alamat  : ");
+                        System.out.print("Id Karyawan : ");
                         newDataKaryawan[i][1] = scan.nextLine();
+                        System.out.print("Email       : ");
+                        newDataKaryawan[i][3] = scan.nextLine();
+                        System.out.print("Alamat      : ");
+                        newDataKaryawan[i][4] = scan.nextLine();
+                        System.out.print("No Hp       : ");
+                        newDataKaryawan[i][5] = scan.nextLine();
 
                         System.out.println("==================================");
                         System.out.println(YELLOW + "               DIVISI  " + RESET);
@@ -112,7 +126,6 @@ public class SistemPenggajian {
                         newDataKaryawan[i][2] = String.valueOf(scan.nextInt());
                         scan.nextLine();
                     }
-
                     // Update the main array with the new data
                     dataKaryawan = newDataKaryawan;
                     jumlahKaryawan += jumlahKaryawanBaru;
@@ -261,42 +274,43 @@ public class SistemPenggajian {
                     System.out.println("==================================");
                     System.out.println(GREEN + "          DATA KARYAWAN " + RESET);
                     System.out.println("==================================");
+                    System.out.println(
+                            "╔═════════════════╦═════════════════╦═════════════════╦═══════════════════════════╦═════════════════╦══════════════╗");
+                    System.out.printf("║ %-15s ║ %-15s ║ %-15s ║ %-25s ║ %-15s ║ %-12s ║%n",
+                            "Nama", "ID Karyawan", "Jabatan", "Email", "Alamat", "No. HP");
+                    System.out.println(
+                            "╠═════════════════╬═════════════════╬═════════════════╬═══════════════════════════╬═════════════════╬══════════════╣");
 
                     for (int i = 0; i < jumlahKaryawan; i++) {
-                        System.out.println();
-                        System.out.println("Karyawan ke-" + (i + 1));
-                        System.out.println();
-                        System.out.println("Nama Karyawan : " + dataKaryawan[i][0]);
-                        System.out.println("Alamat Karyawan : " + dataKaryawan[i][1]);
-                        int divisiIndex = Integer.parseInt(dataKaryawan[i][2]);
-                        String divisi = "";
-                        switch (divisiIndex) {
+                        String jabatan;
+                        switch (Integer.parseInt(dataKaryawan[i][2])) {
                             case 1:
-                                divisi = "Front Office";
+                                jabatan = "Front Office";
                                 break;
                             case 2:
-                                divisi = "House Keeping";
+                                jabatan = "House Keeping";
                                 break;
                             case 3:
-                                divisi = "Food and Beverage Service";
+                                jabatan = "Food and Beverage Service";
                                 break;
                             case 4:
-                                divisi = "Administrasi";
+                                jabatan = "Administrasi";
                                 break;
                             default:
-                                divisi = "Tidak valid";
-                                break;
+                                jabatan = "";
                         }
-                        System.out.println("Divisi Karyawan : " + divisi);
-                        String gajiString = dataKaryawan[i][3];
-                        if (gajiString != null && !gajiString.isEmpty()) {
-                            int totalGaji = Integer.parseInt(gajiString);
-                            System.out.println("Gaji Bulan Ini  : " + formatRupiah.format(totalGaji));
-                        } else {
-                            System.out.println("Gaji Bulan Ini  : " + RED + "Belum ditentukan" + RESET);
-                        }
-                        System.out.println();
+                        System.out.printf("║ %-15s ║ %-15s ║ %-15s ║ %-25s ║ %-15s ║ %-12s ║%n",
+                                dataKaryawan[i][0], // Nama
+                                dataKaryawan[i][1], // ID Karyawan
+                                jabatan, // Jabatan
+                                dataKaryawan[i][3], // Email
+                                dataKaryawan[i][4], // Alamat
+                                dataKaryawan[i][5]); // No. HP
                     }
+                    System.out.println(
+                            "╚═════════════════╩═════════════════╩═════════════════╩═══════════════════════════╩═════════════════╩══════════════╝");
+
+                    // System.out.println("+-----------------+-----------------+-----------------+---------------------------+-----------------+--------------+");
                     System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
                     Enter = scan.nextLine();
                     break;
@@ -334,13 +348,6 @@ public class SistemPenggajian {
                                     break;
                             }
                             System.out.println("Divisi Karyawan : " + divisi);
-                            // String gajiString = dataKaryawan[j][3];
-                            // if (gajiString != null && !gajiString.isEmpty()) {
-                            // int totalGaji = Integer.parseInt(gajiString);
-                            // System.out.println("Gaji Bulan Ini : " + formatRupiah.format(totalGaji));
-                            // } else {
-                            // System.out.println("Gaji Bulan Ini : " + RED + "Belum ditentukan" + RESET);
-                            // }
                             System.out.println();
                             int[] gaji1 = gajiKaryawan.get(0); // Dapatkan array untuk karyawan saat ini
 
@@ -377,7 +384,6 @@ public class SistemPenggajian {
                             int jmlTerlambat = gaji3[2];
                             int jmlAlpa = gaji3[3];
                             int jmlPotongan = gaji3[4];
-
                             System.out.println();
                             System.out.println("-- Potongan --");
                             System.out.println("Terlambat         : " + terlambat + " menit");
