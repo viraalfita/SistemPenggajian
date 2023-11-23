@@ -10,6 +10,7 @@ public class SistemPenggajian {
     static String YELLOW = "\u001B[33m";
     static String GREEN = "\u001B[32m";
     static String RED = "\u001B[31m";
+    static String MAGENTA = "\u001B[35m";
     static String Enter;
 
     static NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
@@ -159,7 +160,7 @@ public class SistemPenggajian {
             System.out.println("==================================");
             System.out.println("1. Front Office");
             System.out.println("2. House Keeping");
-            System.out.println("3. Food and Beverage Service");
+            System.out.println("3. FnB Service");
             System.out.println("4. Administrasi");
             System.out.print("Masukkan kategori divisi anda : ");
             newDataKaryawan[i][2] = String.valueOf(scan.nextInt());
@@ -185,40 +186,22 @@ public class SistemPenggajian {
             if (dataKaryawan[j][0].equalsIgnoreCase(cariNama)) {
                 ditemukan = true;
                 System.out.println();
-                System.out.println("Nama                 : " + dataKaryawan[j][0]);
-                String divisi = "";
+                System.out.println("Nama           : " + dataKaryawan[j][0]);
+                tampilkanDivisi(j);
                 String gajiAkhir = dataKaryawan[j][6];
                 if (gajiAkhir == null || gajiAkhir.isEmpty()) {
-                    switch (Integer.parseInt(dataKaryawan[j][2])) {
-                        case 1:
-                            divisi = "Front Office";
-                            break;
-                        case 2:
-                            divisi = "House Keeping";
-                            break;
-                        case 3:
-                            divisi = "Food and Beverage Service";
-                            break;
-                        case 4:
-                            divisi = "Administrasi";
-                            break;
-                        default:
-                            divisi = "";
-                    }
-                    System.out.println("Divisi               : " + divisi);
-
                     // Input informasi gaji
                     System.out.println();
-                    System.out.println("-- Periode --");
-                    System.out.print("Masukkan periode tahun: ");
+                    System.out.println(MAGENTA + "════════ Periode ════════" + RESET);
+                    System.out.print("Masukkan periode tahun : ");
                     int tahun = scan.nextInt();
-                    System.out.print("Masukkan periode bulan: ");
+                    System.out.print("Masukkan periode bulan : ");
                     int bulan = scan.nextInt();
                     System.out.println();
-                    System.out.println("-- Hari kerja dan jam lembur --");
-                    System.out.print("Masukkan jam lembur: ");
+                    System.out.println(MAGENTA + "════════ Hari kerja dan jam lembur ════════" + RESET);
+                    System.out.print("Masukkan jam lembur : ");
                     int jamLembur = scan.nextInt();
-                    System.out.print("Masukkan hari kerja: ");
+                    System.out.print("Masukkan hari kerja : ");
                     int hariKerja = scan.nextInt();
 
                     // Simpan data gaji karyawan ke dalam array
@@ -228,7 +211,7 @@ public class SistemPenggajian {
 
                     // perhitungan tunjangan
                     System.out.println();
-                    System.out.println("-- Tunjangan --");
+                    System.out.println(MAGENTA + "════════ Tunjangan ════════" + RESET);
                     int jmlTunjMakan = hariKerja * tunjanganMakanTransport[0];
                     int jmlTunjTransport = hariKerja * tunjanganMakanTransport[1];
                     int totalTunj = jmlTunjMakan + jmlTunjTransport;
@@ -246,7 +229,7 @@ public class SistemPenggajian {
 
                     // perhitungan potongan
                     System.out.println();
-                    System.out.println("-- Potongan --");
+                    System.out.println(MAGENTA + "════════ Potongan ════════" + RESET);
                     System.out.print("Masukkan jumlah terlambat : ");
                     int terlambat = scan.nextInt();
                     System.out.print("Masukkan jumlah alpa      : ");
@@ -278,11 +261,11 @@ public class SistemPenggajian {
                     dataKaryawan[j][6] = String.valueOf(totalGaji); // Simpan total gaji
 
                     System.out.println("");
-                    System.out.println("-- Gaji pokok dan lembur --");
+                    System.out.println("════════ Gaji pokok dan lembur ════════");
                     System.out.println("Gaji Pokok   : " + formatRupiah.format(gajiPokok));
                     System.out.println("Gaji Lembur  : " + jamLembur + " x " + formatRupiah.format(gajiLembur)
                             + " = " + formatRupiah.format(jmlGajiLembur));
-                    System.out.println("Total Gaji   :" + formatRupiah.format(totalGaji));
+                    System.out.println("Total Gaji   : " + formatRupiah.format(totalGaji));
 
                     int[] jmlGaji = { jmlGajiPokok, jmlGajiLembur, totalGaji };
                     gajiKaryawan.add(jmlGaji);
@@ -290,14 +273,14 @@ public class SistemPenggajian {
 
                     // perhitungan pajak
                     System.out.println();
-                    System.out.println("-- Pajak --");
+                    System.out.println(MAGENTA + "════════ Pajak ════════" + RESET);
                     int gajiSetelahPajak;
                     int potonganPajak = 0;
                     if (totalGaji >= 3000000) {
                         potonganPajak = totalGaji * 5 / 100;
                         gajiSetelahPajak = totalGaji - potonganPajak;
 
-                        System.out.println("Potongan pajak                       : "
+                        System.out.println("Potongan pajak              : "
                                 + formatRupiah.format(totalGaji) + " x 5% = "
                                 + formatRupiah.format(potonganPajak));
                         System.out.println(
@@ -348,7 +331,7 @@ public class SistemPenggajian {
                     jabatan = "House Keeping";
                     break;
                 case 3:
-                    jabatan = "Food and Beverage Service";
+                    jabatan = "FnB Service";
                     break;
                 case 4:
                     jabatan = "Administrasi";
@@ -390,24 +373,7 @@ public class SistemPenggajian {
                 System.out.println("Alamat         : " + dataKaryawan[j][4]);
                 System.out.println("No. HP         : " + dataKaryawan[j][5]);
                 String divisi = "";
-                switch (Integer.parseInt(dataKaryawan[j][2])) {
-                    case 1:
-                        divisi = "Front Office";
-                        break;
-                    case 2:
-                        divisi = "House Keeping";
-                        break;
-                    case 3:
-                        divisi = "Food and Beverage Service";
-                        break;
-                    case 4:
-                        divisi = "Administrasi";
-                        break;
-                    default:
-                        divisi = "Tidak valid";
-                        break;
-                }
-                System.out.println("Divisi Karyawan : " + divisi);
+                tampilkanDivisi(j);
                 System.out.println();
                 String gajiAkhir = dataKaryawan[j][6];
                 if (gajiAkhir != null && !gajiAkhir.isEmpty()) {
@@ -446,7 +412,7 @@ public class SistemPenggajian {
                     int jmlAlpa = gaji3[3];
                     int jmlPotongan = gaji3[4];
                     System.out.println();
-                    System.out.println("-- Potongan --");
+                    System.out.println(MAGENTA + "-- Potongan --" + RESET);
                     System.out.println("Terlambat         : " + terlambat + " menit");
                     System.out.println("Alpa              : " + alpa + " hari");
                     System.out.println("Total terlambat   : " + formatRupiah.format(jmlTerlambat));
@@ -497,6 +463,28 @@ public class SistemPenggajian {
         }
         System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
         Enter = scan.nextLine();
+    }
+
+    public static void tampilkanDivisi(int index) {
+        String divisi = "";
+
+        switch (Integer.parseInt(dataKaryawan[index][2])) {
+            case 1:
+                divisi = "Front Office";
+                break;
+            case 2:
+                divisi = "House Keeping";
+                break;
+            case 3:
+                divisi = "FnB Service";
+                break;
+            case 4:
+                divisi = "Administrasi";
+                break;
+            default:
+                divisi = "";
+        }
+        System.out.println("Divisi         : " + divisi);
     }
 
     public static void keluarProgram() {
