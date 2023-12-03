@@ -37,16 +37,19 @@ public class SistemPenggajian {
                     String[][] dataKaryawan = tambahDataKaryawan();
                     System.out.println(dataKaryawan);
                     break;
-                case "4":
-                    hitungGajiKaryawan();
+                case "2":
+                    cariDataKaryawan();
                     break;
                 case "3":
                     tampilkanDataKaryawan();
                     break;
-                case "2":
-                    cariDataKaryawan();
+                case "4":
+                    hitungGajiKaryawan();
                     break;
                 case "5":
+                    slipGaji();
+                    break;
+                case "6":
                     keluarProgram();
                     break;
                 default:
@@ -54,7 +57,7 @@ public class SistemPenggajian {
                     break;
             }
 
-            if (pilihMenu.equals("5")) {
+            if (pilihMenu.equals("6")) {
                 break;
             }
         }
@@ -72,15 +75,28 @@ public class SistemPenggajian {
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
+        System.out.println();
+        System.out.println(
+                """
+                        ╔────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╗
+                        │███████╗██╗███████╗████████╗███████╗███╗   ███╗    ██████╗ ███████╗███╗   ██╗ ██████╗  ██████╗  █████╗      ██╗██╗ █████╗ ███╗   ██╗│
+                        │██╔════╝██║██╔════╝╚══██╔══╝██╔════╝████╗ ████║    ██╔══██╗██╔════╝████╗  ██║██╔════╝ ██╔════╝ ██╔══██╗     ██║██║██╔══██╗████╗  ██║│
+                        │███████╗██║███████╗   ██║   █████╗  ██╔████╔██║    ██████╔╝█████╗  ██╔██╗ ██║██║  ███╗██║  ███╗███████║     ██║██║███████║██╔██╗ ██║│
+                        │╚════██║██║╚════██║   ██║   ██╔══╝  ██║╚██╔╝██║    ██╔═══╝ ██╔══╝  ██║╚██╗██║██║   ██║██║   ██║██╔══██║██   ██║██║██╔══██║██║╚██╗██║│
+                        │███████║██║███████║   ██║   ███████╗██║ ╚═╝ ██║    ██║     ███████╗██║ ╚████║╚██████╔╝╚██████╔╝██║  ██║╚█████╔╝██║██║  ██║██║ ╚████║│
+                        │╚══════╝╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝    ╚═╝     ╚══════╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚════╝ ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝│
+                        ╚────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╝                        """);
+
         // Login
         int loop = 0;
         while (loop < 3) {
-            System.out.println("==================================");
-            System.out.println(YELLOW + "           LOGIN PAGE            " + RESET);
-            System.out.println("==================================");
-            System.out.print("Masukkan username : ");
+            System.out.printf("%45s╔════════════════════════════════╗%n", "");
+            System.out.printf("%45s║" + YELLOW + "           LOGIN PAGE           " + RESET + "║%n", "");
+            System.out.printf("%45s╚════════════════════════════════╝%n", "");
+
+            System.out.printf("%-47sMasukkan username : ", "");
             inputUsername = scan.nextLine();
-            System.out.print("Masukkan password : ");
+            System.out.printf("%-47sMasukkan password : ", "");
             inputPassword = scan.nextLine();
 
             // Mengecek username dan password
@@ -95,9 +111,10 @@ public class SistemPenggajian {
                 // Clear cmd
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
-                System.out.println("==================================");
-                System.out.println(RED + "! Username atau password salah !" + RESET);
-                System.out.println("==================================");
+                System.out.printf("%45s╔════════════════════════════════╗%n", "");
+                System.out.printf("%45s║" + RED + "  Username / Password salah !!!" + RESET + " ║%n", "");
+                System.out.printf("%45s╚════════════════════════════════╝%n", "");
+                System.out.println();
             }
             loop++;
         }
@@ -115,7 +132,8 @@ public class SistemPenggajian {
         System.out.println("2. Cari Data Karyawan");
         System.out.println("3. Tampilkan Data Karyawan");
         System.out.println("4. Hitung Gaji Karyawan");
-        System.out.println("5. Keluar");
+        System.out.println("5. Slip Gaji");
+        System.out.println("6. Keluar");
         System.out.print("Pilih menu : ");
         String pilihMenu = scan.nextLine();
         System.out.println();
@@ -132,10 +150,10 @@ public class SistemPenggajian {
         int jumlahKaryawanBaru = scan.nextInt();
         scan.nextLine();
 
-        // Create a temporary array to store the new data
+        // array sementara untuk menyimpan data baru
         String[][] newDataKaryawan = new String[jumlahKaryawan + jumlahKaryawanBaru][7];
 
-        // Copy existing data to the temporary array
+        // Copy data sebelumnya
         for (int i = 0; i < jumlahKaryawan; i++) {
             System.arraycopy(dataKaryawan[i], 0, newDataKaryawan[i], 0, 7);
         }
@@ -166,7 +184,7 @@ public class SistemPenggajian {
             newDataKaryawan[i][2] = String.valueOf(scan.nextInt());
             scan.nextLine();
         }
-        // Update the main array with the new data
+        // perbarui array utama dengan data baru
         dataKaryawan = newDataKaryawan;
         jumlahKaryawan += jumlahKaryawanBaru;
 
@@ -261,7 +279,7 @@ public class SistemPenggajian {
                     dataKaryawan[j][6] = String.valueOf(totalGaji); // Simpan total gaji
 
                     System.out.println("");
-                    System.out.println("════════ Gaji pokok dan lembur ════════");
+                    System.out.println(MAGENTA + "════════ Gaji pokok dan lembur ════════" + RESET);
                     System.out.println("Gaji Pokok   : " + formatRupiah.format(gajiPokok));
                     System.out.println("Gaji Lembur  : " + jamLembur + " x " + formatRupiah.format(gajiLembur)
                             + " = " + formatRupiah.format(jmlGajiLembur));
@@ -350,7 +368,6 @@ public class SistemPenggajian {
         System.out.println(
                 "╚═════════════════╩═════════════════╩═════════════════╩═══════════════════════════╩═════════════════╩══════════════╝");
 
-        // System.out.println("+-----------------+-----------------+-----------------+---------------------------+-----------------+--------------+");
         System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
         Enter = scan.nextLine();
     }
@@ -372,8 +389,9 @@ public class SistemPenggajian {
                 System.out.println("Email          : " + dataKaryawan[j][3]);
                 System.out.println("Alamat         : " + dataKaryawan[j][4]);
                 System.out.println("No. HP         : " + dataKaryawan[j][5]);
-                String divisi = "";
-                tampilkanDivisi(j);
+                System.out.println("Divisi         : " + tampilkanDivisi(j));
+                // String divisi = "";
+                // tampilkanDivisi(j);
                 System.out.println();
                 String gajiAkhir = dataKaryawan[j][6];
                 if (gajiAkhir != null && !gajiAkhir.isEmpty()) {
@@ -384,11 +402,11 @@ public class SistemPenggajian {
                     int hariKerja = gaji1[3];
 
                     System.out.println();
-                    System.out.println("-- Periode --");
+                    System.out.println(MAGENTA + "════════ Periode ════════" + RESET);
                     System.out.println("Periode tahun       : " + periodeTahun);
                     System.out.println("Periode bulan       : " + periodeBulan);
                     System.out.println();
-                    System.out.println("-- Hari kerja dan jam lembur --");
+                    System.out.println(MAGENTA + "════════ Hari kerja dan jam lembur ════════" + RESET);
                     System.out.println("Jam lembur          : " + jamLembur + " jam");
                     System.out.println("Hari kerja          : " + hariKerja + " hari");
 
@@ -398,7 +416,7 @@ public class SistemPenggajian {
                     int jmlTunjTransport = gaji2[1];
                     int totalTunj = gaji2[2];
                     System.out.println();
-                    System.out.println("-- Tunjangan --");
+                    System.out.println(MAGENTA + "════════ Tunjangan ════════" + RESET);
                     System.out.println("Tunjangan makan     : " + formatRupiah.format(jmlTunjMakan));
                     System.out
                             .println("Tunjangan transport : " + formatRupiah.format(jmlTunjTransport));
@@ -412,7 +430,7 @@ public class SistemPenggajian {
                     int jmlAlpa = gaji3[3];
                     int jmlPotongan = gaji3[4];
                     System.out.println();
-                    System.out.println(MAGENTA + "-- Potongan --" + RESET);
+                    System.out.println(MAGENTA + "════════ Potongan ════════" + RESET);
                     System.out.println("Terlambat         : " + terlambat + " menit");
                     System.out.println("Alpa              : " + alpa + " hari");
                     System.out.println("Total terlambat   : " + formatRupiah.format(jmlTerlambat));
@@ -426,7 +444,7 @@ public class SistemPenggajian {
                     int totalGaji = gaji4[2];
 
                     System.out.println();
-                    System.out.println("-- Gaji pokok dan lembur --");
+                    System.out.println(MAGENTA + "════════ Gaji pokok dan lembur ════════" + RESET);
                     System.out
                             .println("Jumlah gaji pokok           : " + formatRupiah.format(jmlGajiPokok));
                     System.out
@@ -439,7 +457,7 @@ public class SistemPenggajian {
                     int potonganPajak = gaji5[1];
 
                     System.out.println();
-                    System.out.println("-- Pajak --");
+                    System.out.println(MAGENTA + "════════ Pajak ════════" + RESET);
                     System.out.println("Potongan pajak     : " + formatRupiah.format(potonganPajak));
                     System.out.println("Gaji setelah pajak : " + formatRupiah.format(gajiSetelahPajak));
 
@@ -465,7 +483,7 @@ public class SistemPenggajian {
         Enter = scan.nextLine();
     }
 
-    public static void tampilkanDivisi(int index) {
+    public static String tampilkanDivisi(int index) {
         String divisi = "";
 
         switch (Integer.parseInt(dataKaryawan[index][2])) {
@@ -484,7 +502,102 @@ public class SistemPenggajian {
             default:
                 divisi = "";
         }
-        System.out.println("Divisi         : " + divisi);
+        // System.out.println("Divisi : " + divisi);
+        return divisi;
+    }
+
+    public static void slipGaji() {
+        System.out.println("==================================");
+        System.out.println(GREEN + "     Slip Gaji" + RESET);
+        System.out.println("==================================");
+        System.out.print("\nMasukkan nama karyawan yang ingin dicetak slip gajinya: ");
+        String cariNama = scan.nextLine();
+
+        boolean ditemukan = false;
+        for (int j = 0; j < jumlahKaryawan; j++) {
+            if (dataKaryawan[j][0].equalsIgnoreCase(cariNama)) {
+                ditemukan = true;
+                System.out.println("\nKaryawan dengan nama " + cariNama + " ditemukan:");
+                String gajiAkhir = dataKaryawan[j][6];
+                if (gajiAkhir != null && !gajiAkhir.isEmpty()) {
+                    int[] gaji1 = gajiKaryawan.get(0); // Dapatkan array untuk karyawan saat ini
+                    int periodeTahun = gaji1[0];
+                    int periodeBulan = gaji1[1];
+                    int jamLembur = gaji1[2];
+                    int hariKerja = gaji1[3];
+                    int[] gaji2 = gajiKaryawan.get(1);
+                    int jmlTunjMakan = gaji2[0];
+                    int jmlTunjTransport = gaji2[1];
+                    int totalTunj = gaji2[2];
+                    int[] gaji3 = gajiKaryawan.get(2);
+                    int terlambat = gaji3[0];
+                    int alpa = gaji3[1];
+                    int jmlTerlambat = gaji3[2];
+                    int jmlAlpa = gaji3[3];
+                    int jmlPotongan = gaji3[4];
+                    int[] gaji4 = gajiKaryawan.get(3);
+                    int jmlGajiPokok = gaji4[0];
+                    int jmlGajiLembur = gaji4[1];
+                    int totalGaji = gaji4[2];
+                    int[] gaji5 = gajiKaryawan.get(4);
+                    int gajiSetelahPajak = gaji5[0];
+                    int potonganPajak = gaji5[1];
+
+                    String indexDivisi = tampilkanDivisi(j);
+
+                    System.out.printf(
+                            "╔════════════════════════════════════════════════════════════════════════════════════════════╗%n");
+                    System.out.printf("║%37sSLIP GAJI KARYAWAN%37s║%n", "", "");
+                    System.out.printf(
+                            "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
+                    System.out.printf("║ Nama Karyawan : %-32s Periode : %-31s ║%n", dataKaryawan[j][0],
+                            periodeBulan + "/" + periodeTahun);
+                    System.out.printf("║ ID Karyawan   : %-32s Email   : %-31s ║%n", dataKaryawan[j][1],
+                            dataKaryawan[j][3]);
+                    System.out.printf("║ Jabatan       : %-32s Alamat  : %-31s ║%n",
+                            indexDivisi,
+                            dataKaryawan[j][4]);
+                    System.out.printf(
+                            "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
+                    System.out.printf("║ Pendapatan :%32s Potongan :%35s ║%n", "", "");
+                    System.out.printf(
+                            "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
+                    System.out.printf("║ Gaji Pokok   : %-29s║ TerLambat    : %-30s║%n",
+                            formatRupiah.format(jmlGajiPokok), formatRupiah.format(jmlTerlambat));
+                    System.out.printf("║ Lembur       : %-29s║ Alfa         : %-30s║%n",
+                            formatRupiah.format(jmlGajiLembur), formatRupiah.format(jmlAlpa));
+                    System.out.printf(
+                            "║ Tunjangan                                   ║ PPH 21       : %-30s║%n",
+                            formatRupiah.format(potonganPajak));
+                    System.out.printf("║ Makan        : %-29s║%46s║%n", formatRupiah.format(jmlTunjMakan), "");
+                    // spaces
+                    System.out.printf("║ Transportasi : %-29s║%46s║%n", formatRupiah.format(jmlTunjTransport), ""); // Adjust
+                                                                                                                    // spaces
+                    System.out.printf("║%-45s║%46s║%n", "", ""); // Empty line
+                    System.out.printf("║ Total Pendapatan :%26s║ Total Potongan :%28s ║%n", "", ""); // Centered text
+                    System.out.printf(
+                            "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
+                    System.out.printf("║ Gaji Diterima   : %-73s║%n", formatRupiah.format(gajiSetelahPajak));
+                    System.out.printf(
+                            "╚════════════════════════════════════════════════════════════════════════════════════════════╝%n");
+
+                } else {
+                    System.out.println("╔════════════════════════════════╗");
+                    System.out.println("║   Karyawan " + cariNama + " Belum Gajian !!!  ║");
+                    System.out.println("╚════════════════════════════════╝");
+                }
+                System.out.println();
+
+                break;
+            }
+        }
+
+        if (!ditemukan) {
+            System.out.println("\nKaryawan dengan nama " + cariNama + " tidak ditemukan.");
+            System.out.println();
+        }
+        System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
+        Enter = scan.nextLine();
     }
 
     public static void keluarProgram() {
@@ -494,10 +607,9 @@ public class SistemPenggajian {
     }
 
     public static void menuTidakValid() {
-        System.out.println("==================================");
-        System.out.println(RED + "! Input yang dimasukkan tidak valid !" + RESET);
-        System.out.println("==================================");
+        System.out.println("╔════════════════════════════════╗");
+        System.out.println("║" + RED + "! Input yang dimasukkan tidak valid !" + RESET + " ║");
+        System.out.println("╚════════════════════════════════╝");
     }
 
-    // Additional Functions...
 }
