@@ -562,16 +562,22 @@ public class SistemPenggajian {
                     System.out.printf("║ Pendapatan :%32s Potongan :%35s ║%n", "", "");
                     System.out.printf(
                             "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
-                    System.out.printf("║ Gaji Pokok   : %-29s║ TerLambat    : %-30s║%n",
-                            formatRupiah.format(jmlGajiPokok), formatRupiah.format(jmlTerlambat));
+                    System.out.printf("║ Gaji Pokok   : %-29s║ Terlambat    : %-30s║%n",
+                            formatRupiah.format(jmlGajiPokok),
+                            terlambat + " x " + "Rp1.000,00 = " + formatRupiah.format(jmlTerlambat));
                     System.out.printf("║ Lembur       : %-29s║ Alfa         : %-30s║%n",
-                            formatRupiah.format(jmlGajiLembur), formatRupiah.format(jmlAlpa));
+                            jamLembur + " x " + formatRupiah.format(gajiPokokLembur[j][1])
+                                    + " = " + formatRupiah.format(jmlGajiLembur),
+                            alpa + " x " + "Rp50.000,00 = "
+                                    + formatRupiah.format(jmlAlpa));
                     System.out.printf(
                             "║ Tunjangan                                   ║ PPH 21       : %-30s║%n",
-                            formatRupiah.format(potonganPajak));
-                    System.out.printf("║ Makan        : %-29s║%46s║%n", formatRupiah.format(jmlTunjMakan), "");
+                            formatRupiah.format(totalGaji) + " x 5% = " + formatRupiah.format(potonganPajak));
+                    System.out.printf("║ Makan        : %-29s║%46s║%n", formatRupiah.format(tunjanganMakanTransport[0])
+                            + " x " + hariKerja + " hari = " + formatRupiah.format(jmlTunjMakan), "");
                     // spaces
-                    System.out.printf("║ Transportasi : %-29s║%46s║%n", formatRupiah.format(jmlTunjTransport), "");
+                    System.out.printf("║ Transportasi : %-29s║%46s║%n", formatRupiah.format(tunjanganMakanTransport[1])
+                            + " x " + hariKerja + " hari = " + formatRupiah.format(jmlTunjTransport), "");
 
                     System.out.printf("║%-45s║%46s║%n", "", "");
                     System.out.printf(
