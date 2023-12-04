@@ -26,7 +26,13 @@ public class SistemPenggajian {
             { 3850000, 12000 } };
     static int[] tunjanganMakanTransport = { 10000, 7000 }; // makan, transport
 
+    static Scanner scanner = new Scanner(System.in);
+    static String[] usernames = new String[100]; // Batasi jumlah pengguna
+    static String[] passwords = new String[100];
+    static int userCount = 0;
+
     public static void main(String[] args) throws Exception {
+        Awalan();
         boolean isValidLogin = login();
 
         while (isValidLogin) {
@@ -65,13 +71,7 @@ public class SistemPenggajian {
         scan.close();
     }
 
-    public static boolean login() {
-        String[] username = { "user", "admin" };
-        String[] password = { "123", "admin" };
-
-        String inputUsername, inputPassword;
-
-        boolean isValidLogin = false;
+    public static void Awalan() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
@@ -87,26 +87,44 @@ public class SistemPenggajian {
                         │╚══════╝╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝    ╚═╝     ╚══════╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚════╝ ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝│
                         ╚────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╝                        """);
 
-        // Login
-        int loop = 0;
-        while (loop < 3) {
-            System.out.printf("%45s╔════════════════════════════════╗%n", "");
-            System.out.printf("%45s║" + YELLOW + "           LOGIN PAGE           " + RESET + "║%n", "");
-            System.out.printf("%45s╚════════════════════════════════╝%n", "");
+            String konfirAkun;
+            System.out.println("Apakah Anda telah memiliki akun?");
+            konfirAkun = scan.nextLine();
+            if (konfirAkun.equalsIgnoreCase("Sudah")) {
+                login();
+        } else if (konfirAkun.equalsIgnoreCase("Belum")) {
+            signUp();
+        } else {
+            System.out.println("Mohon konfirmasi agar bisa melanjutkan program");
+        }
 
-            System.out.printf("%-47sMasukkan username : ", "");
-            inputUsername = scan.nextLine();
-            System.out.printf("%-47sMasukkan password : ", "");
-            inputPassword = scan.nextLine();
+        }
 
-            // Mengecek username dan password
-            for (int i = 0; i < username.length; i++) {
-                if (username[i].equalsIgnoreCase(inputUsername) && password[i].equals(inputPassword)) {
+        public static boolean login() {
+             // Login
+             boolean isValidLogin = false;
+             int loop = 0;
+             while (loop < 3) {
+            System.out.println("Ini adalah halaman login");
+            System.out.println("Silahkan masukkan username dan password!");
+            System.out.println("Masukkan username: ");
+            String username = scanner.next();
+        
+            System.out.println("Masukkan password: ");
+            String password = scanner.next();
+            
+            
+            
+            for (int i = 0; i < userCount; i++) {
+               
+                if (usernames[i].equals(username) && passwords[i].equals(password)) {
+                    System.out.println("Username ditemukan");
                     isValidLogin = true;
                     loop = 3;
                     break;
-                }
+                } 
             }
+
             if (!isValidLogin) {
                 // Clear cmd
                 System.out.print("\033[H\033[2J");
@@ -117,10 +135,23 @@ public class SistemPenggajian {
                 System.out.println();
             }
             loop++;
+            }
+            return isValidLogin;   
         }
+        
 
-        return isValidLogin;
-    }
+    
+        static boolean isValidCredentials(String username, String password) {
+            for (int i = 0; i < userCount; i++) {
+                if (usernames[i].equals(username) && passwords[i].equals(password)) {
+                    System.out.println("Username ditemukan");
+                    return true;
+                } else {
+                    System.out.println("Username tidak ditemukan");
+                }
+            }
+            return false;   
+        }
 
     public static String displayMenu() {
         System.out.print("\033[H\033[2J");
@@ -598,6 +629,37 @@ public class SistemPenggajian {
         }
         System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
         Enter = scan.nextLine();
+    }
+
+    static void signUp() {
+        System.out.println("Silahkan membuat akun terlebih dahulu");
+        System.out.println("Masukkan username: ");
+        String username = scanner.next();
+
+        // Periksa apakah username sudah digunakan
+        if (isUsernameExists(username)) {
+            System.out.println("Username sudah digunakan. Silakan coba username lain.");
+            return;
+        }
+
+        System.out.println("Masukkan password: ");
+        String password = scanner.next();
+
+        // Menyimpan username dan password ke dalam array
+        usernames[userCount] = username;
+        passwords[userCount] = password;
+        userCount++;
+
+        System.out.println("Sign-up berhasil!");
+    }
+
+    static boolean isUsernameExists(String username) {
+        for (int i = 0; i < userCount; i++) {
+            if (usernames[i].equals(username)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void keluarProgram() {
