@@ -26,7 +26,13 @@ public class SistemPenggajian {
             { 3850000, 12000 } };
     static int[] tunjanganMakanTransport = { 10000, 7000 }; // makan, transport
 
+    static Scanner scanner = new Scanner(System.in);
+    static String[] usernames = new String[100]; // Batasi jumlah pengguna
+    static String[] passwords = new String[100];
+    static int userCount = 0;
+
     public static void main(String[] args) throws Exception {
+        Awalan();
         boolean isValidLogin = login();
 
         while (isValidLogin) {
@@ -65,13 +71,7 @@ public class SistemPenggajian {
         scan.close();
     }
 
-    public static boolean login() {
-        String[] username = { "user", "admin" };
-        String[] password = { "123", "admin" };
-
-        String inputUsername, inputPassword;
-
-        boolean isValidLogin = false;
+    public static void Awalan() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
@@ -87,26 +87,42 @@ public class SistemPenggajian {
                         │╚══════╝╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝    ╚═╝     ╚══════╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚════╝ ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝│
                         ╚────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╝                        """);
 
+        String konfirAkun;
+        System.out.print("Apakah Anda telah memiliki akun? (Sudah/Belum)");
+        konfirAkun = scan.nextLine();
+        if (konfirAkun.equalsIgnoreCase("Sudah")) {
+            login();
+        } else if (konfirAkun.equalsIgnoreCase("Belum")) {
+            signUp();
+        } else {
+            System.out.println("Mohon konfirmasi agar bisa melanjutkan program");
+        }
+
+    }
+
+    public static boolean login() {
         // Login
+        boolean isValidLogin = false;
         int loop = 0;
         while (loop < 3) {
-            System.out.printf("%45s╔════════════════════════════════╗%n", "");
-            System.out.printf("%45s║" + YELLOW + "           LOGIN PAGE           " + RESET + "║%n", "");
-            System.out.printf("%45s╚════════════════════════════════╝%n", "");
+            System.out.println("Ini adalah halaman login");
+            System.out.println("Silahkan masukkan username dan password!");
+            System.out.println("Masukkan username: ");
+            String username = scanner.next();
 
-            System.out.printf("%-47sMasukkan username : ", "");
-            inputUsername = scan.nextLine();
-            System.out.printf("%-47sMasukkan password : ", "");
-            inputPassword = scan.nextLine();
+            System.out.println("Masukkan password: ");
+            String password = scanner.next();
 
-            // Mengecek username dan password
-            for (int i = 0; i < username.length; i++) {
-                if (username[i].equalsIgnoreCase(inputUsername) && password[i].equals(inputPassword)) {
+            for (int i = 0; i < userCount; i++) {
+
+                if (usernames[i].equals(username) && passwords[i].equals(password)) {
+                    System.out.println("Username ditemukan");
                     isValidLogin = true;
                     loop = 3;
                     break;
                 }
             }
+
             if (!isValidLogin) {
                 // Clear cmd
                 System.out.print("\033[H\033[2J");
@@ -118,8 +134,19 @@ public class SistemPenggajian {
             }
             loop++;
         }
-
         return isValidLogin;
+    }
+
+    static boolean isValidCredentials(String username, String password) {
+        for (int i = 0; i < userCount; i++) {
+            if (usernames[i].equals(username) && passwords[i].equals(password)) {
+                System.out.println("Username ditemukan");
+                return true;
+            } else {
+                System.out.println("Username tidak ditemukan");
+            }
+        }
+        return false;
     }
 
     public static String displayMenu() {
@@ -248,9 +275,9 @@ public class SistemPenggajian {
                     // perhitungan potongan
                     System.out.println();
                     System.out.println(MAGENTA + "════════ Potongan ════════" + RESET);
-                    System.out.print("Masukkan jumlah terlambat : ");
+                    System.out.print("Masukkan jumlah terlambat (menit) : ");
                     int terlambat = scan.nextInt();
-                    System.out.print("Masukkan jumlah alpa      : ");
+                    System.out.print("Masukkan jumlah alpa      (hari)  : ");
                     int alpa = scan.nextInt();
                     int jmlTerlambat = terlambat * 1000;
                     int jmlAlpa = alpa * 50000;
@@ -547,7 +574,7 @@ public class SistemPenggajian {
 
                     System.out.printf(
                             "╔════════════════════════════════════════════════════════════════════════════════════════════╗%n");
-                    System.out.printf(GREEN + "║%37sSLIP GAJI KARYAWAN%37s║%n" + RESET, "", "");
+                    System.out.printf("║%37sSLIP GAJI KARYAWAN%37s║%n", "", "");
                     System.out.printf(
                             "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
                     System.out.printf("║ Nama Karyawan : %-32s Periode : %-31s ║%n", dataKaryawan[j][0],
@@ -562,34 +589,28 @@ public class SistemPenggajian {
                     System.out.printf("║ Pendapatan :%32s Potongan :%35s ║%n", "", "");
                     System.out.printf(
                             "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
-                    System.out.printf("║ Gaji Pokok   : %-29s║ Terlambat    : %-30s║%n",
-                            formatRupiah.format(jmlGajiPokok),
-                            terlambat + " x " + "Rp1.000,00 = " + formatRupiah.format(jmlTerlambat));
+                    System.out.printf("║ Gaji Pokok   : %-29s║ TerLambat    : %-30s║%n",
+                            formatRupiah.format(jmlGajiPokok), formatRupiah.format(jmlTerlambat));
                     System.out.printf("║ Lembur       : %-29s║ Alfa         : %-30s║%n",
-                            jamLembur + " x " + formatRupiah.format(gajiPokokLembur[j][1])
-                                    + " = " + formatRupiah.format(jmlGajiLembur),
-                            alpa + " x " + "Rp50.000,00 = "
-                                    + formatRupiah.format(jmlAlpa));
+                            formatRupiah.format(jmlGajiLembur), formatRupiah.format(jmlAlpa));
                     System.out.printf(
                             "║ Tunjangan                                   ║ PPH 21       : %-30s║%n",
-                            formatRupiah.format(totalGaji) + " x 5% = " + formatRupiah.format(potonganPajak));
-                    System.out.printf("║ Makan        : %-29s║%46s║%n", formatRupiah.format(tunjanganMakanTransport[0])
-                            + " x " + hariKerja + " hari = " + formatRupiah.format(jmlTunjMakan), "");
+                            formatRupiah.format(potonganPajak));
+                    System.out.printf("║ Makan        : %-29s║%46s║%n", formatRupiah.format(jmlTunjMakan), "");
                     // spaces
-                    System.out.printf("║ Transportasi : %-29s║%46s║%n", formatRupiah.format(tunjanganMakanTransport[1])
-                            + " x " + hariKerja + " hari = " + formatRupiah.format(jmlTunjTransport), "");
+                    System.out.printf("║ Transportasi : %-29s║%46s║%n", formatRupiah.format(jmlTunjTransport), "");
 
                     System.out.printf("║%-45s║%46s║%n", "", "");
+                    System.out.printf("║ Total Pendapatan :%26s║ Total Potongan :%28s ║%n", "", "");
                     System.out.printf(
                             "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
-                    System.out.printf(GREEN + "║ Gaji Diterima   : %-73s║%n" + RESET,
-                            formatRupiah.format(gajiSetelahPajak));
+                    System.out.printf("║ Gaji Diterima   : %-73s║%n", formatRupiah.format(gajiSetelahPajak));
                     System.out.printf(
                             "╚════════════════════════════════════════════════════════════════════════════════════════════╝%n");
 
                 } else {
                     System.out.println("╔════════════════════════════════╗");
-                    System.out.println("║   Karyawan " + cariNama + " Belum Gajian ║");
+                    System.out.println("║   Karyawan " + cariNama + " Belum Gajian !!!  ║");
                     System.out.println("╚════════════════════════════════╝");
                 }
                 System.out.println();
@@ -604,6 +625,37 @@ public class SistemPenggajian {
         }
         System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
         Enter = scan.nextLine();
+    }
+
+    static void signUp() {
+        System.out.println("Silahkan membuat akun terlebih dahulu");
+        System.out.println("Masukkan username: ");
+        String username = scanner.next();
+
+        // Periksa apakah username sudah digunakan
+        if (isUsernameExists(username)) {
+            System.out.println("Username sudah digunakan. Silakan coba username lain.");
+            return;
+        }
+
+        System.out.println("Masukkan password: ");
+        String password = scanner.next();
+
+        // Menyimpan username dan password ke dalam array
+        usernames[userCount] = username;
+        passwords[userCount] = password;
+        userCount++;
+
+        System.out.println("Sign-up berhasil!");
+    }
+
+    static boolean isUsernameExists(String username) {
+        for (int i = 0; i < userCount; i++) {
+            if (usernames[i].equals(username)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void keluarProgram() {
