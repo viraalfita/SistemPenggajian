@@ -329,9 +329,9 @@ public class SistemPenggajian {
     }
 
     public static void tampilkanDataKaryawan() {
-        System.out.println("==================================");
-        System.out.println(GREEN + "          DATA KARYAWAN " + RESET);
-        System.out.println("==================================");
+        System.out.printf("%45s╔════════════════════════════════╗%n", "");
+        System.out.printf("%45s║" + GREEN + "           Data Karyawan        " + RESET + "║%n", "");
+        System.out.printf("%45s╚════════════════════════════════╝%n", "");
         System.out.println(
                 "╔═════════════════╦═════════════════╦═════════════════╦═══════════════════════════╦═════════════════╦══════════════╗");
         System.out.printf("║ %-15s ║ %-15s ║ %-15s ║ %-25s ║ %-15s ║ %-12s ║%n",
@@ -571,10 +571,10 @@ public class SistemPenggajian {
                             formatRupiah.format(potonganPajak));
                     System.out.printf("║ Makan        : %-29s║%46s║%n", formatRupiah.format(jmlTunjMakan), "");
                     // spaces
-                    System.out.printf("║ Transportasi : %-29s║%46s║%n", formatRupiah.format(jmlTunjTransport), ""); // Adjust
-                                                                                                                    // spaces
-                    System.out.printf("║%-45s║%46s║%n", "", ""); // Empty line
-                    System.out.printf("║ Total Pendapatan :%26s║ Total Potongan :%28s ║%n", "", ""); // Centered text
+                    System.out.printf("║ Transportasi : %-29s║%46s║%n", formatRupiah.format(jmlTunjTransport), "");
+
+                    System.out.printf("║%-45s║%46s║%n", "", "");
+                    System.out.printf("║ Total Pendapatan :%26s║ Total Potongan :%28s ║%n", "", "");
                     System.out.printf(
                             "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
                     System.out.printf("║ Gaji Diterima   : %-73s║%n", formatRupiah.format(gajiSetelahPajak));
@@ -601,9 +601,9 @@ public class SistemPenggajian {
     }
 
     public static void keluarProgram() {
-        System.out.println("==================================");
-        System.out.println(RED + "       Exit Program" + RESET);
-        System.out.println("==================================");
+        System.out.println("╔═══════════════════════════════╗");
+        System.out.println("║" + RED + "         Exit Program         " + RESET + " ║");
+        System.out.println("╚═══════════════════════════════╝");
     }
 
     public static void menuTidakValid() {
