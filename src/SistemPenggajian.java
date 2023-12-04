@@ -87,42 +87,40 @@ public class SistemPenggajian {
                         │╚══════╝╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝    ╚═╝     ╚══════╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚════╝ ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝│
                         ╚────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╝                        """);
 
-            String konfirAkun;
-            System.out.println("Apakah Anda telah memiliki akun?");
-            konfirAkun = scan.nextLine();
-            if (konfirAkun.equalsIgnoreCase("Sudah")) {
-                login();
+        String konfirAkun;
+        System.out.print("Apakah Anda telah memiliki akun? (Sudah/Belum)");
+        konfirAkun = scan.nextLine();
+        if (konfirAkun.equalsIgnoreCase("Sudah")) {
+            login();
         } else if (konfirAkun.equalsIgnoreCase("Belum")) {
             signUp();
         } else {
             System.out.println("Mohon konfirmasi agar bisa melanjutkan program");
         }
 
-        }
+    }
 
-        public static boolean login() {
-             // Login
-             boolean isValidLogin = false;
-             int loop = 0;
-             while (loop < 3) {
+    public static boolean login() {
+        // Login
+        boolean isValidLogin = false;
+        int loop = 0;
+        while (loop < 3) {
             System.out.println("Ini adalah halaman login");
             System.out.println("Silahkan masukkan username dan password!");
             System.out.println("Masukkan username: ");
             String username = scanner.next();
-        
+
             System.out.println("Masukkan password: ");
             String password = scanner.next();
-            
-            
-            
+
             for (int i = 0; i < userCount; i++) {
-               
+
                 if (usernames[i].equals(username) && passwords[i].equals(password)) {
                     System.out.println("Username ditemukan");
                     isValidLogin = true;
                     loop = 3;
                     break;
-                } 
+                }
             }
 
             if (!isValidLogin) {
@@ -135,23 +133,21 @@ public class SistemPenggajian {
                 System.out.println();
             }
             loop++;
-            }
-            return isValidLogin;   
         }
-        
+        return isValidLogin;
+    }
 
-    
-        static boolean isValidCredentials(String username, String password) {
-            for (int i = 0; i < userCount; i++) {
-                if (usernames[i].equals(username) && passwords[i].equals(password)) {
-                    System.out.println("Username ditemukan");
-                    return true;
-                } else {
-                    System.out.println("Username tidak ditemukan");
-                }
+    static boolean isValidCredentials(String username, String password) {
+        for (int i = 0; i < userCount; i++) {
+            if (usernames[i].equals(username) && passwords[i].equals(password)) {
+                System.out.println("Username ditemukan");
+                return true;
+            } else {
+                System.out.println("Username tidak ditemukan");
             }
-            return false;   
         }
+        return false;
+    }
 
     public static String displayMenu() {
         System.out.print("\033[H\033[2J");
@@ -279,9 +275,9 @@ public class SistemPenggajian {
                     // perhitungan potongan
                     System.out.println();
                     System.out.println(MAGENTA + "════════ Potongan ════════" + RESET);
-                    System.out.print("Masukkan jumlah terlambat : ");
+                    System.out.print("Masukkan jumlah terlambat (menit) : ");
                     int terlambat = scan.nextInt();
-                    System.out.print("Masukkan jumlah alpa      : ");
+                    System.out.print("Masukkan jumlah alpa      (hari)  : ");
                     int alpa = scan.nextInt();
                     int jmlTerlambat = terlambat * 1000;
                     int jmlAlpa = alpa * 50000;
