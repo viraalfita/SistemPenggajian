@@ -547,7 +547,7 @@ public class SistemPenggajian {
 
                     System.out.printf(
                             "╔════════════════════════════════════════════════════════════════════════════════════════════╗%n");
-                    System.out.printf("║%37sSLIP GAJI KARYAWAN%37s║%n", "", "");
+                    System.out.printf(GREEN + "║%37sSLIP GAJI KARYAWAN%37s║%n" + RESET, "", "");
                     System.out.printf(
                             "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
                     System.out.printf("║ Nama Karyawan : %-32s Periode : %-31s ║%n", dataKaryawan[j][0],
@@ -574,16 +574,16 @@ public class SistemPenggajian {
                     System.out.printf("║ Transportasi : %-29s║%46s║%n", formatRupiah.format(jmlTunjTransport), "");
 
                     System.out.printf("║%-45s║%46s║%n", "", "");
-                    System.out.printf("║ Total Pendapatan :%26s║ Total Potongan :%28s ║%n", "", "");
                     System.out.printf(
                             "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
-                    System.out.printf("║ Gaji Diterima   : %-73s║%n", formatRupiah.format(gajiSetelahPajak));
+                    System.out.printf(GREEN + "║ Gaji Diterima   : %-73s║%n" + RESET,
+                            formatRupiah.format(gajiSetelahPajak));
                     System.out.printf(
                             "╚════════════════════════════════════════════════════════════════════════════════════════════╝%n");
 
                 } else {
                     System.out.println("╔════════════════════════════════╗");
-                    System.out.println("║   Karyawan " + cariNama + " Belum Gajian !!!  ║");
+                    System.out.println("║   Karyawan " + cariNama + " Belum Gajian ║");
                     System.out.println("╚════════════════════════════════╝");
                 }
                 System.out.println();
