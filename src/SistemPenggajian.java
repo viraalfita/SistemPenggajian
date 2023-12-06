@@ -105,7 +105,9 @@ public class SistemPenggajian {
         boolean isValidLogin = false;
         int loop = 0;
         while (loop < 3) {
-            System.out.println("Ini adalah halaman login");
+            System.out.println("==================================");
+            System.out.println(YELLOW + "               LOGIN   " + RESET);
+            System.out.println("==================================");
             System.out.println("Silahkan masukkan username dan password!");
             System.out.print("Masukkan username: ");
             String username = scanner.next();
@@ -630,8 +632,11 @@ public class SistemPenggajian {
     }
 
     static void signUp() {
+        System.out.println("==================================");
+        System.out.println(YELLOW + "               DAFTAR   " + RESET);
+        System.out.println("==================================");
         System.out.println("Silahkan membuat akun terlebih dahulu");
-        System.out.println("Masukkan username: ");
+        System.out.print("Masukkan username: ");
         String username = scanner.next();
 
         // Periksa apakah username sudah digunakan
@@ -640,7 +645,7 @@ public class SistemPenggajian {
             return;
         }
 
-        System.out.println("Masukkan password: ");
+        System.out.print("Masukkan password: ");
         String password = scanner.next();
 
         // Menyimpan username dan password ke dalam array
@@ -649,6 +654,7 @@ public class SistemPenggajian {
         userCount++;
 
         System.out.println("Sign-up berhasil!");
+        System.out.println();
     }
 
     static boolean isUsernameExists(String username) {
