@@ -603,7 +603,7 @@ public class SistemPenggajian {
                     System.out.printf("║ Transportasi : %-29s║%46s║%n", formatRupiah.format(jmlTunjTransport), "");
 
                     System.out.printf("║%-45s║%46s║%n", "", "");
-                    System.out.printf("║ Total Pendapatan :%26s║ Total Potongan :%28s ║%n",
+                    System.out.printf("║ Total Pendapatan : %-25s║ Total Potongan : %-27s ║%n",
                             formatRupiah.format(jmlGajiPokok + jmlGajiLembur + jmlTunjMakan + jmlTunjTransport),
                             formatRupiah.format(jmlTerlambat + jmlAlpa + potonganPajak));
                     System.out.printf(
