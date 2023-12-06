@@ -88,7 +88,7 @@ public class SistemPenggajian {
                         ╚────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╝                        """);
 
         String konfirAkun;
-        System.out.print("Apakah Anda telah memiliki akun? (Sudah/Belum)");
+        System.out.print("Apakah Anda telah memiliki akun? (Sudah/Belum) : ");
         konfirAkun = scan.nextLine();
         if (konfirAkun.equalsIgnoreCase("Sudah")) {
             login();
@@ -107,10 +107,10 @@ public class SistemPenggajian {
         while (loop < 3) {
             System.out.println("Ini adalah halaman login");
             System.out.println("Silahkan masukkan username dan password!");
-            System.out.println("Masukkan username: ");
+            System.out.print("Masukkan username: ");
             String username = scanner.next();
 
-            System.out.println("Masukkan password: ");
+            System.out.print("Masukkan password: ");
             String password = scanner.next();
 
             for (int i = 0; i < userCount; i++) {
@@ -601,7 +601,9 @@ public class SistemPenggajian {
                     System.out.printf("║ Transportasi : %-29s║%46s║%n", formatRupiah.format(jmlTunjTransport), "");
 
                     System.out.printf("║%-45s║%46s║%n", "", "");
-                    System.out.printf("║ Total Pendapatan :%26s║ Total Potongan :%28s ║%n", "", "");
+                    System.out.printf("║ Total Pendapatan :%26s║ Total Potongan :%28s ║%n",
+                            formatRupiah.format(jmlGajiPokok + jmlGajiLembur + jmlTunjMakan + jmlTunjTransport),
+                            formatRupiah.format(jmlTerlambat + jmlAlpa + potonganPajak));
                     System.out.printf(
                             "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
                     System.out.printf("║ Gaji Diterima   : %-73s║%n", formatRupiah.format(gajiSetelahPajak));
