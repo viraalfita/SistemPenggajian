@@ -32,7 +32,6 @@ public class SistemPenggajian {
     static int userCount = 0;
 
     public static void main(String[] args) throws Exception {
-        Awalan();
         boolean isValidLogin = login();
 
         while (isValidLogin) {
@@ -40,20 +39,19 @@ public class SistemPenggajian {
 
             switch (pilihMenu) {
                 case "1":
-                    String[][] dataKaryawan = tambahDataKaryawan();
-                    System.out.println(dataKaryawan);
+                    informasiKaryawan();
                     break;
                 case "2":
                     cariDataKaryawan();
                     break;
                 case "3":
-                    tampilkanDataKaryawan();
-                    break;
-                case "4":
                     hitungGajiKaryawan();
                     break;
-                case "5":
+                case "4":
                     slipGaji();
+                    break;
+                case "5":
+                    login();
                     break;
                 case "6":
                     keluarProgram();
