@@ -18,18 +18,13 @@ public class SistemPenggajian {
     static Scanner scan = new Scanner(System.in);
 
     static int jumlahKaryawan = 0;
-    static String[][] dataKaryawan = new String[jumlahKaryawan][7];// Nama0, id karyawan1, Jabatan2, Email3,Alamat4,
-                                                                   // No.hp5
+    static String[][] dataKaryawan = new String[jumlahKaryawan][10];// Nama0, id karyawan1, Jabatan2, Email3,Alamat4,
+                                                                    // No.hp5,user,pass
 
     static ArrayList<int[]> gajiKaryawan = new ArrayList<>();
     static int[][] gajiPokokLembur = { { 2400000, 12000 }, { 1900000, 10000 }, { 2700000, 13000 }, { 3000000, 10000 },
             { 3850000, 12000 } };
     static int[] tunjanganMakanTransport = { 10000, 7000 }; // makan, transport
-
-    static Scanner scanner = new Scanner(System.in);
-    static String[] usernames = new String[100]; // Batasi jumlah pengguna
-    static String[] passwords = new String[100];
-    static int userCount = 0;
 
     public static void main(String[] args) throws Exception {
         boolean isValidLogin = login();
@@ -69,22 +64,45 @@ public class SistemPenggajian {
         scan.close();
     }
 
-    public static void Awalan() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-        System.out.println();
+    public static boolean login() {
+        String[] username = { "admin" };
+        String[] password = { "admin" };
+
+        String inputUsername, inputPassword;
+
+        boolean isValidLogin = false;
+        clear();
         welcome();
-        String konfirAkun;
-        System.out.print("Apakah Anda telah memiliki akun? (Sudah/Belum) : ");
-        konfirAkun = scan.nextLine();
-        if (konfirAkun.equalsIgnoreCase("Sudah")) {
-            login();
-        } else if (konfirAkun.equalsIgnoreCase("Belum")) {
-            signUp();
-        } else {
-            System.out.println("Mohon konfirmasi agar bisa melanjutkan program");
+        // Login
+        int loop = 0;
+        while (loop < 3) {
+            System.out.printf("%45s╔════════════════════════════════╗%n", "");
+            System.out.printf("%45s║" + YELLOW + "           LOGIN PAGE           " + RESET + "║%n", "");
+            System.out.printf("%45s╚════════════════════════════════╝%n", "");
+            System.out.printf("%-47sMasukkan username : ", "");
+            inputUsername = scan.nextLine();
+            System.out.printf("%-47sMasukkan password : ", "");
+            inputPassword = scan.nextLine();
+
+            // Mengecek username dan password
+            for (int i = 0; i < username.length; i++) {
+                if (username[i].equalsIgnoreCase(inputUsername) && password[i].equals(inputPassword)) {
+                    isValidLogin = true;
+                    loop = 3;
+                    break;
+                }
+            }
+            if (!isValidLogin) {
+                clear();
+                System.out.printf("%45s╔════════════════════════════════╗%n", "");
+                System.out.printf("%45s║" + RED + "  Username / Password salah !!!" + RESET + " ║%n", "");
+                System.out.printf("%45s╚════════════════════════════════╝%n", "");
+                System.out.println();
+            }
+            loop++;
         }
 
+        return isValidLogin;
     }
 
     public static void clear() {
@@ -104,57 +122,6 @@ public class SistemPenggajian {
                         │╚══════╝╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝    ╚═╝     ╚══════╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚════╝ ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝│
                         ╚────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╝                        """);
 
-    }
-
-    public static boolean login() {
-        // Login
-        boolean isValidLogin = false;
-        int loop = 0;
-        while (loop < 3) {
-            System.out.println("==================================");
-            System.out.println(YELLOW + "               LOGIN   " + RESET);
-            System.out.println("==================================");
-            System.out.println("Silahkan masukkan username dan password!");
-            System.out.print("Masukkan username: ");
-            String username = scanner.next();
-
-            System.out.print("Masukkan password: ");
-            String password = scanner.next();
-
-            for (int i = 0; i < userCount; i++) {
-
-                if (usernames[i].equals(username) && passwords[i].equals(password)) {
-                    System.out.println("Username ditemukan");
-                    isValidLogin = true;
-                    loop = 3;
-                    break;
-                }
-            }
-
-            if (!isValidLogin) {
-                // Clear cmd
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
-                System.out.printf("%45s╔════════════════════════════════╗%n", "");
-                System.out.printf("%45s║" + RED + "  Username / Password salah !!!" + RESET + " ║%n", "");
-                System.out.printf("%45s╚════════════════════════════════╝%n", "");
-                System.out.println();
-            }
-            loop++;
-        }
-        return isValidLogin;
-    }
-
-    static boolean isValidCredentials(String username, String password) {
-        for (int i = 0; i < userCount; i++) {
-            if (usernames[i].equals(username) && passwords[i].equals(password)) {
-                System.out.println("Username ditemukan");
-                return true;
-            } else {
-                System.out.println("Username tidak ditemukan");
-            }
-        }
-        return false;
     }
 
     public static String displayMenu() {
@@ -180,16 +147,17 @@ public class SistemPenggajian {
     }
 
     public static String[][] tambahDataKaryawan() {
+        clear();
         System.out.print("Masukkan jumlah karyawan baru : ");
         int jumlahKaryawanBaru = scan.nextInt();
         scan.nextLine();
 
         // array sementara untuk menyimpan data baru
-        String[][] newDataKaryawan = new String[jumlahKaryawan + jumlahKaryawanBaru][7];
+        String[][] newDataKaryawan = new String[jumlahKaryawan + jumlahKaryawanBaru][10];
 
         // Copy data sebelumnya
         for (int i = 0; i < jumlahKaryawan; i++) {
-            System.arraycopy(dataKaryawan[i], 0, newDataKaryawan[i], 0, 7);
+            System.arraycopy(dataKaryawan[i], 0, newDataKaryawan[i], 0, 10);
         }
 
         // Input new data
@@ -206,6 +174,10 @@ public class SistemPenggajian {
             newDataKaryawan[i][4] = scan.nextLine();
             System.out.print("No Hp       : ");
             newDataKaryawan[i][5] = scan.nextLine();
+            System.out.print("Username    : ");
+            newDataKaryawan[i][8] = scan.nextLine();
+            System.out.print("Password    : ");
+            newDataKaryawan[i][9] = scan.nextLine();
 
             System.out.println("==================================");
             System.out.println(YELLOW + "               DIVISI  " + RESET);
@@ -221,6 +193,7 @@ public class SistemPenggajian {
         // perbarui array utama dengan data baru
         dataKaryawan = newDataKaryawan;
         jumlahKaryawan += jumlahKaryawanBaru;
+        informasiKaryawan();
 
         return dataKaryawan;
     }
@@ -426,8 +399,8 @@ public class SistemPenggajian {
                 System.out.println("Alamat         : " + dataKaryawan[j][4]);
                 System.out.println("No. HP         : " + dataKaryawan[j][5]);
                 System.out.println("Divisi         : " + tampilkanDivisi(j));
-                // String divisi = "";
-                // tampilkanDivisi(j);
+                System.out.println("Username       : " + dataKaryawan[j][8]);
+                System.out.println("Password       : " + dataKaryawan[j][9]);
                 System.out.println();
                 String gajiAkhir = dataKaryawan[j][6];
                 if (gajiAkhir != null && !gajiAkhir.isEmpty()) {
@@ -538,7 +511,6 @@ public class SistemPenggajian {
             default:
                 divisi = "";
         }
-        // System.out.println("Divisi : " + divisi);
         return divisi;
     }
 
@@ -620,7 +592,7 @@ public class SistemPenggajian {
 
                 } else {
                     System.out.println("╔════════════════════════════════╗");
-                    System.out.println("║   Karyawan " + cariNama + " Belum Gajian !!!  ║");
+                    System.out.println("║   Karyawan " + cariNama + " Belum Gajian   ║");
                     System.out.println("╚════════════════════════════════╝");
                 }
                 System.out.println();
@@ -637,41 +609,6 @@ public class SistemPenggajian {
         Enter = scan.nextLine();
     }
 
-    static void signUp() {
-        System.out.println("==================================");
-        System.out.println(YELLOW + "               DAFTAR   " + RESET);
-        System.out.println("==================================");
-        System.out.println("Silahkan membuat akun terlebih dahulu");
-        System.out.print("Masukkan username: ");
-        String username = scanner.next();
-
-        // Periksa apakah username sudah digunakan
-        if (isUsernameExists(username)) {
-            System.out.println("Username sudah digunakan. Silakan coba username lain.");
-            return;
-        }
-
-        System.out.print("Masukkan password: ");
-        String password = scanner.next();
-
-        // Menyimpan username dan password ke dalam array
-        usernames[userCount] = username;
-        passwords[userCount] = password;
-        userCount++;
-
-        System.out.println("Sign-up berhasil!");
-        System.out.println();
-    }
-
-    static boolean isUsernameExists(String username) {
-        for (int i = 0; i < userCount; i++) {
-            if (usernames[i].equals(username)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public static void keluarProgram() {
         System.out.println("╔═══════════════════════════════╗");
         System.out.println("║" + RED + "         Exit Program         " + RESET + " ║");
@@ -684,79 +621,8 @@ public class SistemPenggajian {
         System.out.println("╚════════════════════════════════╝");
     }
 
-    public static String informasiKaryawan() {
-        // clear();
-        tampilkanDataKaryawan();
-
-        System.out.println();
-        System.out.println("==================================");
-        System.out.println(YELLOW + "                MENU   " + RESET);
-        System.out.println("==================================");
-        System.out.println("1. Tambahkan Data Karyawan");
-        System.out.println("2. Update Data Karyawan");
-        System.out.println("3. Hapus data Karyawan");
-        System.out.println("4. kembali");
-        System.out.print("Pilih menu : ");
-        String infoMenu = scan.nextLine();
-        System.out.println();
-        switch (infoMenu) {
-            case "1":
-                String[][] dataKaryawan = tambahDataKaryawan();
-                System.out.println(dataKaryawan);
-                break;
-            case "2":
-                // editDataKaryawan();
-                break;
-            case "3":
-                // hapusDataKaryawan();
-                break;
-            case "4":
-                break;
-            default:
-                break;
-        }
-        // clear();
-        String Enter;
-
-        return infoMenu;
-    }
-
-    public static String[][] hapusDataKaryawan() {
-        // clear();
-        // Tampilkan data karyawan terlebih dahulu
-        tampilkanDataKaryawan();
-
-        // Input ID Karyawan yang akan dihapus
-        System.out.print("Masukkan ID Karyawan yang akan dihapus: ");
-        String idKaryawanToDelete = scan.nextLine();
-
-        // Cari indeks data karyawan berdasarkan ID
-        int indexToDelete = -1;
-        for (int i = 0; i < jumlahKaryawan; i++) {
-            if (dataKaryawan[i][1].equals(idKaryawanToDelete)) {
-                indexToDelete = i;
-                break;
-            }
-        }
-
-        if (indexToDelete == -1) {
-            System.out.println("ID Karyawan tidak ditemukan.");
-        } else {
-            // Hapus data karyawan dari array
-            for (int i = indexToDelete; i < jumlahKaryawan - 1; i++) {
-                System.arraycopy(dataKaryawan[i + 1], 0, dataKaryawan[i], 0, 7);
-            }
-            jumlahKaryawan--;
-
-            System.out.println("Data Karyawan berhasil dihapus.");
-        }
-        // clear();
-        informasiKaryawan();
-        return dataKaryawan;
-    }
-
     public static String[][] editDataKaryawan() {
-        // clear();
+        clear();
         // Tampilkan data karyawan terlebih dahulu
         tampilkanDataKaryawan();
 
@@ -833,9 +699,79 @@ public class SistemPenggajian {
                     System.out.println("Opsi tidak valid.");
             }
         }
-        // clear();
+        clear();
         informasiKaryawan();
         return dataKaryawan;
     }
 
+    public static String informasiKaryawan() {
+        clear();
+        tampilkanDataKaryawan();
+
+        System.out.println();
+        System.out.println("==================================");
+        System.out.println(YELLOW + "                MENU   " + RESET);
+        System.out.println("==================================");
+        System.out.println("1. Tambahkan Data Karyawan");
+        System.out.println("2. Update Data Karyawan");
+        System.out.println("3. Hapus data Karyawan");
+        System.out.println("4. kembali");
+        System.out.print("Pilih menu : ");
+        String infoMenu = scan.nextLine();
+        System.out.println();
+        switch (infoMenu) {
+            case "1":
+                String[][] dataKaryawan = tambahDataKaryawan();
+                System.out.println(dataKaryawan);
+                break;
+            case "2":
+                editDataKaryawan();
+                break;
+            case "3":
+                hapusDataKaryawan();
+                break;
+            case "4":
+                break;
+            default:
+                break;
+        }
+        clear();
+        String Enter;
+
+        return infoMenu;
+    }
+
+    public static String[][] hapusDataKaryawan() {
+        clear();
+        // Tampilkan data karyawan terlebih dahulu
+        tampilkanDataKaryawan();
+
+        // Input ID Karyawan yang akan dihapus
+        System.out.print("Masukkan ID Karyawan yang akan dihapus: ");
+        String idKaryawanToDelete = scan.nextLine();
+
+        // Cari indeks data karyawan berdasarkan ID
+        int indexToDelete = -1;
+        for (int i = 0; i < jumlahKaryawan; i++) {
+            if (dataKaryawan[i][1].equals(idKaryawanToDelete)) {
+                indexToDelete = i;
+                break;
+            }
+        }
+
+        if (indexToDelete == -1) {
+            System.out.println("ID Karyawan tidak ditemukan.");
+        } else {
+            // Hapus data karyawan dari array
+            for (int i = indexToDelete; i < jumlahKaryawan - 1; i++) {
+                System.arraycopy(dataKaryawan[i + 1], 0, dataKaryawan[i], 0, 7);
+            }
+            jumlahKaryawan--;
+
+            System.out.println("Data Karyawan berhasil dihapus.");
+        }
+        clear();
+        informasiKaryawan();
+        return dataKaryawan;
+    }
 }
