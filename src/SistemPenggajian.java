@@ -160,24 +160,22 @@ public class SistemPenggajian {
     }
 
     public static String displayMenu() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        clear();
         welcome();
         System.out.println("==================================");
         System.out.println(YELLOW + "                MENU   " + RESET);
         System.out.println("==================================");
-        System.out.println("1. Tambahkan Data Karyawan");
+        System.out.println("1. Kelola Data Karyawan");
         System.out.println("2. Cari Data Karyawan");
-        System.out.println("3. Tampilkan Data Karyawan");
-        System.out.println("4. Hitung Gaji Karyawan");
-        System.out.println("5. Slip Gaji");
+        System.out.println("3. Hitung Gaji Karyawan");
+        System.out.println("4. Slip Gaji");
+        System.out.println("5. Log out");
         System.out.println("6. Keluar");
         System.out.print("Pilih menu : ");
         String pilihMenu = scan.nextLine();
         System.out.println();
 
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        clear();
         String Enter;
 
         return pilihMenu;
