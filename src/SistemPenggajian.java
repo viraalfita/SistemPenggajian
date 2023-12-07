@@ -367,15 +367,16 @@ public class SistemPenggajian {
     }
 
     public static void tampilkanDataKaryawan() {
-        System.out.printf("%45s╔════════════════════════════════╗%n", "");
-        System.out.printf("%45s║" + GREEN + "           Data Karyawan        " + RESET + "║%n", "");
-        System.out.printf("%45s╚════════════════════════════════╝%n", "");
+        System.out.printf("%50s╔═══════════════════════════════════╗%n", "");
+        System.out.printf("%50s║" + GREEN + "        Kelola Data Karyawan       " + RESET + "║%n", "");
+        System.out.printf("%50s╚═══════════════════════════════════╝%n", "");
+        System.out.println();
         System.out.println(
-                "╔═════════════════╦═════════════════╦═════════════════╦═══════════════════════════╦═════════════════╦══════════════╗");
-        System.out.printf("║ %-15s ║ %-15s ║ %-15s ║ %-25s ║ %-15s ║ %-12s ║%n",
-                "Nama", "ID Karyawan", "Jabatan", "Email", "Alamat", "No. HP");
+                "╔═════════════════╦═════════════════╦═════════════════╦═══════════════════════════╦═════════════════╦══════════════╦═════════════════╦═════════════════╗");
+        System.out.printf("║ %-15s ║ %-15s ║ %-15s ║ %-25s ║ %-15s ║ %-12s ║ %-15s ║ %-15s ║%n",
+                "Nama", "ID Karyawan", "Jabatan", "Email", "Alamat", "No. HP", "Username", "Password");
         System.out.println(
-                "╠═════════════════╬═════════════════╬═════════════════╬═══════════════════════════╬═════════════════╬══════════════╣");
+                "╠═════════════════╬═════════════════╬═════════════════╬═══════════════════════════╬═════════════════╬══════════════╬═════════════════╬═════════════════╣");
 
         for (int i = 0; i < jumlahKaryawan; i++) {
             String jabatan;
@@ -395,19 +396,20 @@ public class SistemPenggajian {
                 default:
                     jabatan = "";
             }
-            System.out.printf("║ %-15s ║ %-15s ║ %-15s ║ %-25s ║ %-15s ║ %-12s ║%n",
+            System.out.printf("║ %-15s ║ %-15s ║ %-15s ║ %-25s ║ %-15s ║ %-12s ║ %-15s ║ %-15s ║%n",
                     dataKaryawan[i][0], // Nama
                     dataKaryawan[i][1], // ID Karyawan
                     jabatan, // Jabatan
                     dataKaryawan[i][3], // Email
                     dataKaryawan[i][4], // Alamat
-                    dataKaryawan[i][5]); // No. HP
+                    dataKaryawan[i][5], // No. HP
+                    dataKaryawan[i][8], // Username
+                    dataKaryawan[i][9]);// Password
+
         }
         System.out.println(
-                "╚═════════════════╩═════════════════╩═════════════════╩═══════════════════════════╩═════════════════╩══════════════╝");
+                "╚═════════════════╩═════════════════╩═════════════════╩═══════════════════════════╩═════════════════╩══════════════╩═════════════════╩═════════════════╝");
 
-        System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
-        Enter = scan.nextLine();
     }
 
     public static void cariDataKaryawan() {
