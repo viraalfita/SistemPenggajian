@@ -718,4 +718,38 @@ public class SistemPenggajian {
         return infoMenu;
     }
 
+    public static String[][] hapusDataKaryawan() {
+        // clear();
+        // Tampilkan data karyawan terlebih dahulu
+        tampilkanDataKaryawan();
+
+        // Input ID Karyawan yang akan dihapus
+        System.out.print("Masukkan ID Karyawan yang akan dihapus: ");
+        String idKaryawanToDelete = scan.nextLine();
+
+        // Cari indeks data karyawan berdasarkan ID
+        int indexToDelete = -1;
+        for (int i = 0; i < jumlahKaryawan; i++) {
+            if (dataKaryawan[i][1].equals(idKaryawanToDelete)) {
+                indexToDelete = i;
+                break;
+            }
+        }
+
+        if (indexToDelete == -1) {
+            System.out.println("ID Karyawan tidak ditemukan.");
+        } else {
+            // Hapus data karyawan dari array
+            for (int i = indexToDelete; i < jumlahKaryawan - 1; i++) {
+                System.arraycopy(dataKaryawan[i + 1], 0, dataKaryawan[i], 0, 7);
+            }
+            jumlahKaryawan--;
+
+            System.out.println("Data Karyawan berhasil dihapus.");
+        }
+        // clear();
+        informasiKaryawan();
+        return dataKaryawan;
+    }
+
 }
