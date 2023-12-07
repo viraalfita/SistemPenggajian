@@ -89,6 +89,11 @@ public class SistemPenggajian {
 
     }
 
+    public static void clear() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     public static void welcome() {
         System.out.println(
                 """
@@ -746,6 +751,89 @@ public class SistemPenggajian {
             jumlahKaryawan--;
 
             System.out.println("Data Karyawan berhasil dihapus.");
+        }
+        // clear();
+        informasiKaryawan();
+        return dataKaryawan;
+    }
+
+    public static String[][] editDataKaryawan() {
+        // clear();
+        // Tampilkan data karyawan terlebih dahulu
+        tampilkanDataKaryawan();
+
+        // Input ID Karyawan yang akan diubah
+        System.out.print("Masukkan ID Karyawan yang akan diubah: ");
+        String idKaryawanToEdit = scan.nextLine();
+
+        // Cari indeks data karyawan berdasarkan ID
+        int indexToEdit = -1;
+        for (int i = 0; i < jumlahKaryawan; i++) {
+            if (dataKaryawan[i][1].equals(idKaryawanToEdit)) {
+                indexToEdit = i;
+                break;
+            }
+        }
+
+        if (indexToEdit == -1) {
+            System.out.println("ID Karyawan tidak ditemukan.");
+        } else {
+            // Tampilkan opsi pengeditan
+            System.out.println("Pilih data yang ingin diubah:");
+            System.out.println("1. Nama");
+            System.out.println("2. ID Karyawan");
+            System.out.println("3. Jabatan");
+            System.out.println("4. Email");
+            System.out.println("5. Alamat");
+            System.out.println("6. No. HP");
+            System.out.println("7. Username");
+            System.out.println("8. Password");
+            System.out.print("Masukkan nomor opsi yang dipilih: ");
+            int opsi = scan.nextInt();
+            scan.nextLine();
+
+            // Edit data sesuai opsi yang dipilih
+            switch (opsi) {
+                case 1:
+                    System.out.print("Masukkan nama baru: ");
+                    dataKaryawan[indexToEdit][0] = scan.nextLine();
+                    break;
+                case 2:
+                    System.out.print("Masukkan ID Karyawan baru: ");
+                    dataKaryawan[indexToEdit][1] = scan.nextLine();
+                    break;
+                case 3:
+                    System.out.println("Pilih jabatan baru:");
+                    System.out.println("1. Front Office");
+                    System.out.println("2. House Keeping");
+                    System.out.println("3. FnB Service");
+                    System.out.println("4. Administrasi");
+                    System.out.print("Masukkan kategori divisi baru: ");
+                    dataKaryawan[indexToEdit][2] = String.valueOf(scan.nextInt());
+                    scan.nextLine(); // Membersihkan newline
+                    break;
+                case 4:
+                    System.out.print("Masukkan email baru: ");
+                    dataKaryawan[indexToEdit][3] = scan.nextLine();
+                    break;
+                case 5:
+                    System.out.print("Masukkan alamat baru: ");
+                    dataKaryawan[indexToEdit][4] = scan.nextLine();
+                    break;
+                case 6:
+                    System.out.print("Masukkan No. HP baru: ");
+                    dataKaryawan[indexToEdit][5] = scan.nextLine();
+                    break;
+                case 7:
+                    System.out.print("Masukkan username baru: ");
+                    dataKaryawan[indexToEdit][8] = scan.nextLine();
+                    break;
+                case 8:
+                    System.out.print("Masukkan password baru: ");
+                    dataKaryawan[indexToEdit][9] = scan.nextLine();
+                default:
+                    System.out.println("Opsi tidak valid.");
+            }
         }
         // clear();
         informasiKaryawan();
