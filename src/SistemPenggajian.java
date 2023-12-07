@@ -74,19 +74,8 @@ public class SistemPenggajian {
     public static void Awalan() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
-
         System.out.println();
-        System.out.println(
-                """
-                        ╔────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╗
-                        │███████╗██╗███████╗████████╗███████╗███╗   ███╗    ██████╗ ███████╗███╗   ██╗ ██████╗  ██████╗  █████╗      ██╗██╗ █████╗ ███╗   ██╗│
-                        │██╔════╝██║██╔════╝╚══██╔══╝██╔════╝████╗ ████║    ██╔══██╗██╔════╝████╗  ██║██╔════╝ ██╔════╝ ██╔══██╗     ██║██║██╔══██╗████╗  ██║│
-                        │███████╗██║███████╗   ██║   █████╗  ██╔████╔██║    ██████╔╝█████╗  ██╔██╗ ██║██║  ███╗██║  ███╗███████║     ██║██║███████║██╔██╗ ██║│
-                        │╚════██║██║╚════██║   ██║   ██╔══╝  ██║╚██╔╝██║    ██╔═══╝ ██╔══╝  ██║╚██╗██║██║   ██║██║   ██║██╔══██║██   ██║██║██╔══██║██║╚██╗██║│
-                        │███████║██║███████║   ██║   ███████╗██║ ╚═╝ ██║    ██║     ███████╗██║ ╚████║╚██████╔╝╚██████╔╝██║  ██║╚█████╔╝██║██║  ██║██║ ╚████║│
-                        │╚══════╝╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝    ╚═╝     ╚══════╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚════╝ ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝│
-                        ╚────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╝                        """);
-
+        welcome();
         String konfirAkun;
         System.out.print("Apakah Anda telah memiliki akun? (Sudah/Belum) : ");
         konfirAkun = scan.nextLine();
@@ -97,6 +86,20 @@ public class SistemPenggajian {
         } else {
             System.out.println("Mohon konfirmasi agar bisa melanjutkan program");
         }
+
+    }
+
+    public static void welcome() {
+        System.out.println(
+                """
+                        ╔────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╗
+                        │███████╗██╗███████╗████████╗███████╗███╗   ███╗    ██████╗ ███████╗███╗   ██╗ ██████╗  ██████╗  █████╗      ██╗██╗ █████╗ ███╗   ██╗│
+                        │██╔════╝██║██╔════╝╚══██╔══╝██╔════╝████╗ ████║    ██╔══██╗██╔════╝████╗  ██║██╔════╝ ██╔════╝ ██╔══██╗     ██║██║██╔══██╗████╗  ██║│
+                        │███████╗██║███████╗   ██║   █████╗  ██╔████╔██║    ██████╔╝█████╗  ██╔██╗ ██║██║  ███╗██║  ███╗███████║     ██║██║███████║██╔██╗ ██║│
+                        │╚════██║██║╚════██║   ██║   ██╔══╝  ██║╚██╔╝██║    ██╔═══╝ ██╔══╝  ██║╚██╗██║██║   ██║██║   ██║██╔══██║██   ██║██║██╔══██║██║╚██╗██║│
+                        │███████║██║███████║   ██║   ███████╗██║ ╚═╝ ██║    ██║     ███████╗██║ ╚████║╚██████╔╝╚██████╔╝██║  ██║╚█████╔╝██║██║  ██║██║ ╚████║│
+                        │╚══════╝╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝    ╚═╝     ╚══════╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚════╝ ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝│
+                        ╚────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╝                        """);
 
     }
 
@@ -154,6 +157,7 @@ public class SistemPenggajian {
     public static String displayMenu() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+        welcome();
         System.out.println("==================================");
         System.out.println(YELLOW + "                MENU   " + RESET);
         System.out.println("==================================");
@@ -599,7 +603,6 @@ public class SistemPenggajian {
                             "║ Tunjangan                                   ║ PPH 21       : %-30s║%n",
                             formatRupiah.format(potonganPajak));
                     System.out.printf("║ Makan        : %-29s║%46s║%n", formatRupiah.format(jmlTunjMakan), "");
-                    // spaces
                     System.out.printf("║ Transportasi : %-29s║%46s║%n", formatRupiah.format(jmlTunjTransport), "");
 
                     System.out.printf("║%-45s║%46s║%n", "", "");
@@ -676,6 +679,43 @@ public class SistemPenggajian {
         System.out.println("╔════════════════════════════════╗");
         System.out.println("║" + RED + "! Input yang dimasukkan tidak valid !" + RESET + " ║");
         System.out.println("╚════════════════════════════════╝");
+    }
+
+    public static String informasiKaryawan() {
+        // clear();
+        tampilkanDataKaryawan();
+
+        System.out.println();
+        System.out.println("==================================");
+        System.out.println(YELLOW + "                MENU   " + RESET);
+        System.out.println("==================================");
+        System.out.println("1. Tambahkan Data Karyawan");
+        System.out.println("2. Update Data Karyawan");
+        System.out.println("3. Hapus data Karyawan");
+        System.out.println("4. kembali");
+        System.out.print("Pilih menu : ");
+        String infoMenu = scan.nextLine();
+        System.out.println();
+        switch (infoMenu) {
+            case "1":
+                String[][] dataKaryawan = tambahDataKaryawan();
+                System.out.println(dataKaryawan);
+                break;
+            case "2":
+                // editDataKaryawan();
+                break;
+            case "3":
+                // hapusDataKaryawan();
+                break;
+            case "4":
+                break;
+            default:
+                break;
+        }
+        // clear();
+        String Enter;
+
+        return infoMenu;
     }
 
 }
