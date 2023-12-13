@@ -406,6 +406,42 @@ public class SistemPenggajian {
         // ... (existing code)
     }
 
+    // Function to display salary history
+    public static void tampilkanRiwayatGaji() {
+        clear();
+        System.out.println("╔═════════════════════════════════════╗");
+        System.out.println("║" + GREEN + "        RIWAYAT GAJI KARYAWAN        " + RESET + "║");
+        System.out.println("╚═════════════════════════════════════╝");
+
+        System.out.print("Masukkan Nama Karyawan : ");
+        String cariNama = scan.nextLine();
+        boolean ditemukan = false;
+
+        for (int j = 0; j < jumlahKaryawan; j++) {
+            if (dataKaryawan[j][0].equalsIgnoreCase(cariNama)) {
+                ditemukan = true;
+
+                // Tampilkan header tabel
+                System.out.println();
+                System.out.println("╔══════════════╦══════════════════════╗");
+                System.out.printf("║ %-12s ║ %-20s ║%n", "Periode", "Gaji Diterima");
+                System.out.println("╠══════════════╬══════════════════════╣");
+
+                // Tampilkan riwayat gaji
+                for (Object[] periodeGaji : historiGaji) {
+                    if (periodeGaji[0].equals(cariNama)) {
+                        System.out.printf("║ %-12s ║ %-20s ║%n", periodeGaji[2] + "/" + periodeGaji[1],
+                                formatRupiah.format(periodeGaji[3]));
+                    }
+                }
+                System.out.println("╚══════════════╩══════════════════════╝");
+
+                System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
+                Enter = scan.nextLine();
+            }
+        }
+    }
+
     public static void tampilkanDataKaryawan() {
         System.out.printf("%50s╔═══════════════════════════════════╗%n", "");
         System.out.printf("%50s║" + GREEN + "        Kelola Data Karyawan       " + RESET + "║%n", "");
