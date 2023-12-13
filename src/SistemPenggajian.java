@@ -1,5 +1,6 @@
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -22,6 +23,8 @@ public class SistemPenggajian {
                                                                     // No.hp5,user,pass
 
     static ArrayList<int[]> gajiKaryawan = new ArrayList<>();
+    static List<Object[]> historiGaji = new ArrayList<>();
+
     static int[][] gajiPokokLembur = { { 2400000, 12000 }, { 1900000, 10000 }, { 2700000, 13000 }, { 3000000, 10000 },
             { 3850000, 12000 } };
     static int[] tunjanganMakanTransport = { 10000, 7000 }; // makan, transport
@@ -61,6 +64,7 @@ public class SistemPenggajian {
                         break;
                     case "2":
                         cariDataKaryawan();
+                        // tampilkanRiwayatGaji(); // Tampilkan riwayat gaji
                         break;
                     case "3":
                         hitungGajiKaryawan();
@@ -86,9 +90,6 @@ public class SistemPenggajian {
         } else if (inputLogin == 2) {
             loginKaryawan();
         }
-        // else {
-        // menuTidakValid();
-        // }
         return pilihLogin(); // Meminta input ulang setelah selesai menjalankan validasi
     }
 
@@ -188,6 +189,7 @@ public class SistemPenggajian {
         System.out.println("2. Cari Data Karyawan");
         System.out.println("3. Hitung Gaji Karyawan");
         System.out.println("4. Slip Gaji");
+        ;
         System.out.println("5. Log out");
         System.out.println("6. Keluar");
         System.out.print("Pilih menu : ");
@@ -258,7 +260,6 @@ public class SistemPenggajian {
         System.out.println("╚══════════════════════════════╝");
         System.out.print("Masukkan Nama Karyawan : ");
         String cariNama = scan.nextLine();
-
         boolean ditemukan = false;
         for (int j = 0; j < jumlahKaryawan; j++) {
             if (dataKaryawan[j][0].equalsIgnoreCase(cariNama)) {
@@ -267,14 +268,29 @@ public class SistemPenggajian {
                 System.out.println("Nama           : " + dataKaryawan[j][0]);
                 tampilkanDivisi(j);
                 String gajiAkhir = dataKaryawan[j][6];
-                if (gajiAkhir == null || gajiAkhir.isEmpty()) {
-                    // Input informasi gaji
-                    System.out.println();
-                    System.out.println(MAGENTA + "════════ Periode ════════" + RESET);
-                    System.out.print("Masukkan periode tahun : ");
-                    int tahun = scan.nextInt();
-                    System.out.print("Masukkan periode bulan : ");
-                    int bulan = scan.nextInt();
+
+                // Input informasi gaji
+                System.out.println();
+                System.out.println(MAGENTA + "════════ Periode ════════" + RESET);
+                System.out.print("Masukkan periode tahun : ");
+                int tahun = scan.nextInt();
+                System.out.print("Masukkan periode bulan : ");
+                int bulan = scan.nextInt();
+
+                // Check if the salary for the given period already exists in history
+                boolean periodeExist = false;
+                for (Object[] histori : historiGaji) {
+                    int historiTahun = (int) histori[1];
+                    int historiBulan = (int) histori[2];
+
+                    if (historiTahun == tahun && historiBulan == bulan) {
+                        periodeExist = true;
+                        System.out.println("Gaji untuk periode " + tahun + "-" + bulan + " sudah dihitung sebelumnya!");
+                        break;
+                    }
+                }
+
+                if (!periodeExist) {
                     System.out.println();
                     System.out.println(MAGENTA + "════════ Hari kerja dan jam lembur ════════" + RESET);
                     System.out.print("Masukkan jam lembur : ");
@@ -377,15 +393,17 @@ public class SistemPenggajian {
                     System.out.println("==========================================");
                     System.out.println();
                     dataKaryawan[j][6] = String.valueOf(totalGaji);
-                } else {
-                    System.out.println("Data karyawan tidak ditemukan atau gaji sudah diinput!");
+
+                    // Save salary history
+                    Object[] periodeGaji = { dataKaryawan[j][0], tahun, bulan, totalGaji }; // Include employee name
+                    historiGaji.add(periodeGaji);
                 }
+
+                // ... (existing code)
             }
-
         }
-        System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
-        Enter = scan.nextLine();
 
+        // ... (existing code)
     }
 
     public static void tampilkanDataKaryawan() {
