@@ -64,7 +64,6 @@ public class SistemPenggajian {
                         break;
                     case "2":
                         cariDataKaryawan();
-                        // tampilkanRiwayatGaji(); // Tampilkan riwayat gaji
                         break;
                     case "3":
                         hitungGajiKaryawan();
@@ -73,17 +72,19 @@ public class SistemPenggajian {
                         slipGaji();
                         break;
                     case "5":
+                        tampilkanRiwayatGaji();
+                        break;
+                    case "6":
                         clear();
                         return -1; // Keluar ke fungsi main
-                    case "6":
+                    case "7":
                         keluarProgram();
-                        break;
                     default:
                         menuTidakValid();
                         break;
                 }
 
-                if (pilihMenu.equals("6")) {
+                if (pilihMenu.equals("7")) {
                     return 0; // Keluar ke fungsi main
                 }
             }
@@ -189,9 +190,9 @@ public class SistemPenggajian {
         System.out.println("2. Cari Data Karyawan");
         System.out.println("3. Hitung Gaji Karyawan");
         System.out.println("4. Slip Gaji");
-        ;
-        System.out.println("5. Log out");
-        System.out.println("6. Keluar");
+        System.out.println("5. Riwayat Gaji Karyawan");
+        System.out.println("6. Log out");
+        System.out.println("7. Keluar");
         System.out.print("Pilih menu : ");
         String pilihMenu = scan.nextLine();
         System.out.println();
