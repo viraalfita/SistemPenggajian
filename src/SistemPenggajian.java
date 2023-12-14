@@ -818,13 +818,18 @@ public class SistemPenggajian {
         if (indexToDelete == -1) {
             System.out.println("ID Karyawan tidak ditemukan.");
         } else {
-            // Hapus data karyawan dari array
+            System.out.print("Apakah Anda yakin ingin menghapus data karyawan?(Ya/Tidak) : ");
+            String konfir = scan.nextLine();
+            // Hapus
+            if (konfir.equalsIgnoreCase("Ya")) {
             for (int i = indexToDelete; i < jumlahKaryawan - 1; i++) {
                 System.arraycopy(dataKaryawan[i + 1], 0, dataKaryawan[i], 0, 7);
             }
             jumlahKaryawan--;
-
             System.out.println("Data Karyawan berhasil dihapus.");
+            } else if (konfir.equalsIgnoreCase("Tidak")) {
+                System.out.println("Data karyawan tidak jadi dihapus");
+            }
         }
         clear();
         informasiKaryawan();
