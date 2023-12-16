@@ -440,7 +440,8 @@ public class SistemPenggajian {
                     Object[] periodeGaji = { dataKaryawan[j][0], tahun, bulan, totalGaji, jmlTunjMakan,
                             jmlTunjTransport, tunjKesehatan, tunjKeluarga, totalTunj, jmlTerlambat, jmlAlpa,
                             jmlGajiPokok,
-                            jmlGajiLembur, gajiSetelahPajak, potonganPajak };
+                            jmlGajiLembur, gajiSetelahPajak, potonganPajak,
+                            dataKaryawan[j][8] };
                     historiGaji.add(periodeGaji);
 
                     System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
@@ -956,7 +957,7 @@ public class SistemPenggajian {
         System.out.println("║" + GREEN + "        RIWAYAT GAJI KARYAWAN        " + RESET + "║");
         System.out.println("╚═════════════════════════════════════╝");
         for (int j = 0; j < jumlahKaryawan; j++) {
-            if (dataKaryawan[j][0].equalsIgnoreCase(inputUsernameKaryawan)) {
+            if (dataKaryawan[j][8].equalsIgnoreCase(inputUsernameKaryawan)) {
                 // Tampilkan header tabel
                 System.out.println();
                 System.out.println("╔══════════════╦══════════════════════╗");
@@ -965,7 +966,7 @@ public class SistemPenggajian {
 
                 // Tampilkan riwayat gaji
                 for (Object[] periodeGaji : historiGaji) {
-                    if (periodeGaji[0].equals(inputUsernameKaryawan)) {
+                    if (periodeGaji[15].equals(inputUsernameKaryawan)) {
                         System.out.printf("║ %-12s ║ %-20s ║%n", periodeGaji[2] + "/" + periodeGaji[1],
                                 formatRupiah.format(periodeGaji[3]));
                     }
