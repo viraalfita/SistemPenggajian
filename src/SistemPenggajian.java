@@ -231,7 +231,7 @@ public class SistemPenggajian {
         String pilihMenu = scan.nextLine();
         System.out.println();
 
-        String Enter;
+        // String Enter;
 
         clear();
         return pilihMenu;
@@ -297,14 +297,14 @@ public class SistemPenggajian {
         System.out.println("╚══════════════════════════════╝");
         System.out.print("Masukkan Nama Karyawan : ");
         String cariNama = scan.nextLine();
-        boolean ditemukan = false;
+        // boolean ditemukan = false;
         for (int j = 0; j < jumlahKaryawan; j++) {
             if (dataKaryawan[j][0].equalsIgnoreCase(cariNama)) {
-                ditemukan = true;
+                // ditemukan = true;
                 System.out.println();
                 System.out.println("Nama           : " + dataKaryawan[j][0]);
                 tampilkanDivisi(j);
-                String gajiAkhir = dataKaryawan[j][6];
+                // String gajiAkhir = dataKaryawan[j][6];
 
                 // Input informasi gaji
                 System.out.println();
@@ -457,12 +457,9 @@ public class SistemPenggajian {
 
         System.out.print("Masukkan Nama Karyawan : ");
         String cariNama = scan.nextLine();
-        boolean ditemukan = false;
 
         for (int j = 0; j < jumlahKaryawan; j++) {
             if (dataKaryawan[j][0].equalsIgnoreCase(cariNama)) {
-                ditemukan = true;
-
                 // Tampilkan header tabel
                 System.out.println();
                 System.out.println("╔══════════════╦══════════════════════╗");
@@ -687,24 +684,24 @@ public class SistemPenggajian {
                     int[] gaji1 = gajiKaryawan.get(0); // Dapatkan array untuk karyawan saat ini
                     int periodeTahun = gaji1[0];
                     int periodeBulan = gaji1[1];
-                    int jamLembur = gaji1[2];
-                    int hariKerja = gaji1[3];
+                    // int jamLembur = gaji1[2];
+                    // int hariKerja = gaji1[3];
                     int[] gaji2 = gajiKaryawan.get(1);
                     int jmlTunjMakan = gaji2[0];
                     int jmlTunjTransport = gaji2[1];
-                    int totalTunj = gaji2[2];
+                    // int totalTunj = gaji2[2];
                     int tunjKesehatan = gaji2[3];
                     int tunjKeluarga = gaji2[4];
                     int[] gaji3 = gajiKaryawan.get(2);
-                    int terlambat = gaji3[0];
-                    int alpa = gaji3[1];
+                    // int terlambat = gaji3[0];
+                    // int alpa = gaji3[1];
                     int jmlTerlambat = gaji3[2];
                     int jmlAlpa = gaji3[3];
-                    int jmlPotongan = gaji3[4];
+                    // int jmlPotongan = gaji3[4];
                     int[] gaji4 = gajiKaryawan.get(3);
                     int jmlGajiPokok = gaji4[0];
                     int jmlGajiLembur = gaji4[1];
-                    int totalGaji = gaji4[2];
+                    // int totalGaji = gaji4[2];
                     int[] gaji5 = gajiKaryawan.get(4);
                     int gajiSetelahPajak = gaji5[0];
                     int potonganPajak = gaji5[1];
@@ -898,7 +895,7 @@ public class SistemPenggajian {
                 break;
         }
         clear();
-        String Enter;
+        // String Enter;
 
         return infoMenu;
     }
@@ -947,22 +944,22 @@ public class SistemPenggajian {
             int[] gaji1 = gajiKaryawan.get(0); // Dapatkan array untuk karyawan saat ini
             int periodeTahun = gaji1[0];
             int periodeBulan = gaji1[1];
-            int jamLembur = gaji1[2];
-            int hariKerja = gaji1[3];
+            // int jamLembur = gaji1[2];
+            // int hariKerja = gaji1[3];
             int[] gaji2 = gajiKaryawan.get(1);
             int jmlTunjMakan = gaji2[0];
             int jmlTunjTransport = gaji2[1];
-            int totalTunj = gaji2[2];
+            // int totalTunj = gaji2[2];
             int[] gaji3 = gajiKaryawan.get(2);
-            int terlambat = gaji3[0];
-            int alpa = gaji3[1];
+            // int terlambat = gaji3[0];
+            // int alpa = gaji3[1];
             int jmlTerlambat = gaji3[2];
             int jmlAlpa = gaji3[3];
-            int jmlPotongan = gaji3[4];
+            // int jmlPotongan = gaji3[4];
             int[] gaji4 = gajiKaryawan.get(3);
             int jmlGajiPokok = gaji4[0];
             int jmlGajiLembur = gaji4[1];
-            int totalGaji = gaji4[2];
+            // int totalGaji = gaji4[2];
             int[] gaji5 = gajiKaryawan.get(4);
             int gajiSetelahPajak = gaji5[0];
             int potonganPajak = gaji5[1];
