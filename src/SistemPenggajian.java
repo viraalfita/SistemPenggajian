@@ -751,8 +751,16 @@ public class SistemPenggajian {
             // Edit data sesuai opsi yang dipilih
             switch (opsi) {
                 case 1:
+                    String oldName = dataKaryawan[indexToEdit][0];
                     System.out.print("Masukkan nama baru: ");
                     dataKaryawan[indexToEdit][0] = scan.nextLine();
+
+                    for (Object[] data : historiGaji) {
+                        if (data[0].equals(oldName)) {
+                            data[0] = dataKaryawan[indexToEdit][0];
+                            historiGaji.set(historiGaji.indexOf(data), data);
+                        }
+                    }
                     break;
                 case 2:
                     System.out.print("Masukkan ID Karyawan baru: ");
