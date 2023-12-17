@@ -789,8 +789,16 @@ public class SistemPenggajian {
                     dataKaryawan[indexToEdit][5] = scan.nextLine();
                     break;
                 case 7:
+                    String oldUsername = dataKaryawan[indexToEdit][8];
                     System.out.print("Masukkan username baru: ");
                     dataKaryawan[indexToEdit][8] = scan.nextLine();
+
+                    for (Object[] user : historiGaji) {
+                        if (user[15].equals(oldUsername)) {
+                            user[15] = dataKaryawan[indexToEdit][8];
+                            historiGaji.set(historiGaji.indexOf(user), user);
+                        }
+                    }
                     break;
                 case 8:
                     System.out.print("Masukkan password baru: ");
