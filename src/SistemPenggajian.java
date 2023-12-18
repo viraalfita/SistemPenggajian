@@ -473,7 +473,7 @@ public class SistemPenggajian {
                 for (Object[] periodeGaji : historiGaji) {
                     if (periodeGaji[0].equals(cariNama)) {
                         System.out.printf("║ %-12s ║ %-20s ║%n", periodeGaji[2] + "/" + periodeGaji[1],
-                                formatRupiah.format(periodeGaji[3]));
+                                formatRupiah.format(periodeGaji[13]));
                     }
                 }
                 System.out.println("╚══════════════╩══════════════════════╝");
@@ -984,7 +984,7 @@ public class SistemPenggajian {
                 for (Object[] periodeGaji : historiGaji) {
                     if (periodeGaji[15].equals(inputUsernameKaryawan)) {
                         System.out.printf("║ %-12s ║ %-20s ║%n", periodeGaji[2] + "/" + periodeGaji[1],
-                                formatRupiah.format(periodeGaji[3]));
+                                formatRupiah.format(periodeGaji[13]));
                     }
                 }
                 System.out.println("╚══════════════╩══════════════════════╝");
