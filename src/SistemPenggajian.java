@@ -636,6 +636,7 @@ public class SistemPenggajian {
 
                     if (gajiTerbaru[0].equals(cariNama) && (int) gajiTerbaru[1] == cariTahun
                             && (int) gajiTerbaru[2] == cariBulan) {
+
                         // Informasi gaji sesuai dengan periode yang dimasukkan
                         System.out.printf(
                                 "╔════════════════════════════════════════════════════════════════════════════════════════════╗%n");
