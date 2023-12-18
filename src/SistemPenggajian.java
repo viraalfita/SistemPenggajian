@@ -306,9 +306,9 @@ public class SistemPenggajian {
                 boolean periodeExist = false;
                 System.out.println();
                 System.out.println(MAGENTA + "════════ Periode ════════" + RESET);
-                System.out.print("Masukkan periode tahun : ");
+                System.out.print("Masukkan Tahun (YYYY) : ");
                 int tahun = scan.nextInt();
-                System.out.print("Masukkan periode bulan : ");
+                System.out.print("Masukkan Bulan (MM)   : ");
                 int bulan = scan.nextInt();
 
                 for (Object[] histori : historiGaji) {
