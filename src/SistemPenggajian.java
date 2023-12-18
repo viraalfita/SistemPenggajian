@@ -441,7 +441,7 @@ public class SistemPenggajian {
                             jmlTunjTransport, tunjKesehatan, tunjKeluarga, totalTunj, jmlTerlambat, jmlAlpa,
                             jmlGajiPokok,
                             jmlGajiLembur, gajiSetelahPajak, potonganPajak,
-                            dataKaryawan[j][8], };
+                            dataKaryawan[j][8] };
                     historiGaji.add(periodeGaji);
 
                     System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
