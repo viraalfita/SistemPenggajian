@@ -98,8 +98,8 @@ public class SistemPenggajian {
 
     public static boolean login() {
         welcome();
-        String[] username = { "admin" };
-        String[] password = { "admin" };
+        String[] username = { "admin", "admin1", "admin2" };
+        String[] password = { "admin", "admin1", "admin2" };
 
         String inputUsername, inputPassword;
 
@@ -231,8 +231,6 @@ public class SistemPenggajian {
         String pilihMenu = scan.nextLine();
         System.out.println();
 
-        // String Enter;
-
         clear();
         return pilihMenu;
 
@@ -333,11 +331,6 @@ public class SistemPenggajian {
                     System.out.print("Masukkan hari kerja : ");
                     int hariKerja = scan.nextInt();
 
-                    // Simpan data gaji karyawan ke dalam array
-                    // int[] gaji = { tahun, bulan, jamLembur, hariKerja };
-                    // gajiKaryawan.add(gaji);
-                    // scan.nextLine();
-
                     // Perhitungan tunjangan
                     System.out.println();
                     System.out.println(MAGENTA + "════════ Tunjangan ════════" + RESET);
@@ -358,10 +351,6 @@ public class SistemPenggajian {
                     System.out.println("Tunjangan Keluarga   : " + formatRupiah.format(tunjKeluarga));
                     System.out.println("Total Tunjangan      : " + formatRupiah.format(totalTunj));
 
-                    // int[] tunjangan = { jmlTunjMakan, jmlTunjTransport, totalTunj, tunjKesehatan,
-                    // tunjKeluarga };
-                    // gajiKaryawan.add(tunjangan);
-
                     // Perhitungan potongan
                     System.out.println();
                     System.out.println(MAGENTA + "════════ Potongan ════════" + RESET);
@@ -380,9 +369,6 @@ public class SistemPenggajian {
                     System.out.println("Potongan alpa       : " + alpa + " x " + "Rp50.000,00 = "
                             + formatRupiah.format(jmlAlpa));
                     System.out.println("Total Potongan      : " + formatRupiah.format(jmlPotongan));
-
-                    // int[] potongan = { terlambat, alpa, jmlTerlambat, jmlAlpa, jmlPotongan };
-                    // gajiKaryawan.add(potongan);
 
                     // Perhitungan total gaji sebelum pajak
                     int divisiIndex = Integer.parseInt(dataKaryawan[j][2]) - 1;
@@ -403,9 +389,6 @@ public class SistemPenggajian {
                                     + " = " + formatRupiah.format(jmlGajiLembur));
                     System.out.println("Total Gaji (Sebelum Pajak) : " + formatRupiah.format(totalGaji));
 
-                    // int[] jmlGaji = { jmlGajiPokok, jmlGajiLembur, totalGaji };
-                    // gajiKaryawan.add(jmlGaji);
-
                     // Perhitungan pajak
                     System.out.println();
                     System.out.println(MAGENTA + "════════ Pajak ════════" + RESET);
@@ -424,9 +407,6 @@ public class SistemPenggajian {
                         gajiSetelahPajak = totalGaji - 0;
                         System.out.println("Karyawan tidak dikenakan pajak penghasilan");
                     }
-
-                    // int[] pajak = { gajiSetelahPajak, potonganPajak };
-                    // gajiKaryawan.add(pajak);
 
                     System.out.println();
                     System.out.println("__________________________________________");
@@ -678,8 +658,6 @@ public class SistemPenggajian {
                             System.out.printf("║ Gaji Diterima   : %-73s║%n", formatRupiah.format(gajiSetelahPajak));
                             System.out.printf(
                                     "╚════════════════════════════════════════════════════════════════════════════════════════════╝%n");
-                        } else {
-                            System.out.println("Informasi gaji untuk periode yang dimasukkan tidak ditemukan.");
                         }
                     }
                 } else {
@@ -775,7 +753,7 @@ public class SistemPenggajian {
                     System.out.println("4. Administrasi");
                     System.out.print("Masukkan kategori divisi baru: ");
                     dataKaryawan[indexToEdit][2] = String.valueOf(scan.nextInt());
-                    scan.nextLine(); // Membersihkan newline
+                    scan.nextLine();
                     break;
                 case 4:
                     System.out.print("Masukkan email baru: ");
@@ -845,7 +823,6 @@ public class SistemPenggajian {
                 break;
         }
         clear();
-        // String Enter;
 
         return infoMenu;
     }
