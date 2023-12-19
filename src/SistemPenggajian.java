@@ -618,12 +618,18 @@ public class SistemPenggajian {
             if (dataKaryawan[j][0].equalsIgnoreCase(cariNama)) {
                 ditemukan = true;
                 System.out.println("\nKaryawan dengan nama " + cariNama + " ditemukan:");
-                String gajiAkhir = dataKaryawan[j][6];
-                if (gajiAkhir != null && !gajiAkhir.isEmpty()) {
-                    // Cari informasi gaji terbaru
-                    int indeksTerakhir = historiGaji.size() - 1;
-                    Object[] gajiTerbaru = historiGaji.get(indeksTerakhir);
 
+                // Cari informasi gaji untuk periode yang diminta
+                Object[] gajiTerbaru = null;
+                for (Object[] periodeGaji : historiGaji) {
+                    if (periodeGaji[0].equals(cariNama) && (int) periodeGaji[1] == cariTahun
+                            && (int) periodeGaji[2] == cariBulan) {
+                        gajiTerbaru = periodeGaji;
+                        break;
+                    }
+                }
+
+                if (gajiTerbaru != null) {
                     int periodeTahun = (int) gajiTerbaru[1];
                     int periodeBulan = (int) gajiTerbaru[2];
                     int jmlTunjMakan = (int) gajiTerbaru[4];
@@ -687,7 +693,7 @@ public class SistemPenggajian {
                 } else {
                     System.out.println("═══════════════════════════════════");
                     System.out.println("   Karyawan " + cariNama + " Belum Gajian   ");
-                    System.out.println("══════════════════════════════════");
+                    System.out.println("═══════════════════════════════════");
                 }
                 System.out.println();
 
