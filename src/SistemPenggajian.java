@@ -554,23 +554,27 @@ public class SistemPenggajian {
                 System.out.println("Username       : " + dataKaryawan[j][8]);
                 System.out.println("Password       : " + dataKaryawan[j][9]);
                 System.out.println("__________________________________________");
-                System.out.println("Gaji terakhir  : " + dataKaryawan[j][6]);
-                System.out.println("==========================================");
-                System.out.println();
+
+                if (dataKaryawan[j][6] != null && !dataKaryawan[j][6].isEmpty()) {
+                    int gajiterakhir = Integer.parseInt(dataKaryawan[j][6]);
+                    System.out.println("Gaji terakhir  : " + formatRupiah.format(gajiterakhir));
+                    System.out.println("==========================================");
+                    System.out.println();
+                } else {
+                    System.out.println("Gaji terakhir  : " + RED + "Belum ditentukan" + RESET);
+                    System.out.println("==========================================");
+                    System.out.println();
+                }
             }
+
         }
-
-        if (!ditemukan)
-
-        {
+        if (!ditemukan) {
             System.out.println("\nKaryawan dengan nama " + cariNama + " tidak ditemukan.");
             System.out.println();
         }
         System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
         Enter = scan.nextLine();
-
         clear();
-
     }
 
     public static String tampilkanDivisi(int index) {
@@ -678,14 +682,12 @@ public class SistemPenggajian {
                             System.out.printf("║ Gaji Diterima   : %-73s║%n", formatRupiah.format(gajiSetelahPajak));
                             System.out.printf(
                                     "╚════════════════════════════════════════════════════════════════════════════════════════════╝%n");
-                        } else {
-                            System.out.println("Informasi gaji untuk periode yang dimasukkan tidak ditemukan.");
                         }
                     }
                 } else {
-                    System.out.println("╔════════════════════════════════╗");
-                    System.out.println("║   Karyawan " + cariNama + " Belum Gajian   ║");
-                    System.out.println("╚════════════════════════════════╝");
+                    System.out.println("═══════════════════════════════════");
+                    System.out.println("   Karyawan " + cariNama + " Belum Gajian   ");
+                    System.out.println("══════════════════════════════════");
                 }
                 System.out.println();
 
@@ -709,9 +711,9 @@ public class SistemPenggajian {
     }
 
     public static void menuTidakValid() {
-        System.out.println("╔════════════════════════════════╗");
-        System.out.println("║" + RED + "! Input yang dimasukkan tidak valid !" + RESET + " ║");
-        System.out.println("╚════════════════════════════════╝");
+        System.out.println("╔═══════════════════════════════════╗");
+        System.out.println("║" + RED + " Input yang dimasukkan tidak valid " + RESET + "║");
+        System.out.println("╚═══════════════════════════════════╝");
     }
 
     public static String[][] editDataKaryawan() {
