@@ -77,6 +77,7 @@ public class SistemPenggajian {
                         break;
                     case "6":
                         tampilkanRiwayatGaji();
+                        break;
                     case "7":
                         clear();
                         return -1;
