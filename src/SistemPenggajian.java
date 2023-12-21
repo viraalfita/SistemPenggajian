@@ -999,19 +999,13 @@ public class SistemPenggajian {
                 "Pendapatan", "Sanksi", "Pajak", "Potongan", "Gaji Bersih");
         System.out.println(
                 "╠═════════════╬═══════════╬══════════════╬════════════╬══════════╬══════════╬══════════╬══════════╬══════════╬════════════╬══════════╬══════════╬═══════════╬═══════════╣");
-        boolean found = false;
 
         for (int i = 0; i < jumlahKaryawan; i++) {
-            found = false; // Reset the flag for each employee
-
             for (Object[] periodeGaji : historiGaji) {
                 String nama = dataKaryawan[i][0]; // nama
 
-                // Check if the year and month match the desired period
                 if (periodeGaji[0].equals(nama) && (int) periodeGaji[1] == cariTahun
                         && (int) periodeGaji[2] == cariBulan) {
-                    found = true;
-
                     String idKaryawan = dataKaryawan[i][1]; // NIP
                     String divisi = tampilkanDivisi(i); // Jabatan
                     int jmlTunjMakan = (int) periodeGaji[4]; // makan
@@ -1021,21 +1015,21 @@ public class SistemPenggajian {
                     int jmlGajiPokok = (int) periodeGaji[11]; // gaji pokok
                     int jmlGajiLembur = (int) periodeGaji[12]; // lembur
 
-                    // Calculate pendapatan
+                    // Tampilkan pendapatan
                     int pendapatan = jmlGajiPokok + jmlGajiLembur + jmlTunjMakan +
                             jmlTunjTransport
                             + tunjKeluarga + tunjKesehatan;
 
-                    // Calculate potongan
+                    // Tampilkan potongan
                     int jmlTerlambat = (int) periodeGaji[9];
                     int jmlAlpa = (int) periodeGaji[10];
                     int potonganPajak = (int) periodeGaji[14];
                     int potongan = jmlTerlambat + jmlAlpa + potonganPajak;
 
-                    // Calculate sanksi
+                    // Tampilkan sanksi
                     int sanksi = jmlTerlambat + jmlAlpa;
 
-                    // Calculate gajiSetelahPajak
+                    // Tampilkan gajiSetelahPajak
                     int gajiSetelahPajak = (int) periodeGaji[13];
                     System.out.printf(
                             "║%-12s ║%-10s ║%-13s ║%-11s ║%-9s ║%-9s ║%-9s ║%-9s ║%-9s ║%-11s ║%-10s║%-9s ║%-10s ║%-11s║%n",
