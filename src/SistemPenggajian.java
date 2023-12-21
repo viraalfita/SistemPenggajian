@@ -226,7 +226,7 @@ public class SistemPenggajian {
         System.out.println("4. Slip Gaji");
         System.out.println("5. Riwayat Gaji Karyawan");
         System.out.println("6. Log out");
-        System.out.println("7. Keluar");
+        System.out.println("7. Keluar Program");
         System.out.print("Pilih menu : ");
         String pilihMenu = scan.nextLine();
         System.out.println();
@@ -295,9 +295,10 @@ public class SistemPenggajian {
         System.out.println("╚══════════════════════════════╝");
         System.out.print("Masukkan Nama Karyawan : ");
         String cariNama = scan.nextLine();
-        // boolean ditemukan = false;
+        boolean ditemukan = false;
         for (int j = 0; j < jumlahKaryawan; j++) {
             if (dataKaryawan[j][0].equalsIgnoreCase(cariNama)) {
+                ditemukan = true;
                 System.out.println();
                 System.out.println("Nama           : " + dataKaryawan[j][0]);
                 tampilkanDivisi(j);
@@ -430,6 +431,12 @@ public class SistemPenggajian {
             }
         }
 
+        if (!ditemukan) {
+            System.out.println("╔═════════════════════════════════════╗");
+            System.out.println("║" + RED + "        Karyawan Tidak Terdaftar        " + RESET + "║");
+            System.out.println("╚═════════════════════════════════════╝");
+        }
+
     }
 
     public static void tampilkanRiwayatGaji() {
@@ -441,8 +448,10 @@ public class SistemPenggajian {
         System.out.print("Masukkan Nama Karyawan : ");
         String cariNama = scan.nextLine();
 
+        boolean ditemukan = false;
         for (int j = 0; j < jumlahKaryawan; j++) {
             if (dataKaryawan[j][0].equalsIgnoreCase(cariNama)) {
+                ditemukan = true;
                 // Tampilkan header tabel
                 System.out.println();
                 System.out.println("╔══════════════╦══════════════════════╗");
@@ -462,6 +471,12 @@ public class SistemPenggajian {
                 Enter = scan.nextLine();
                 clear();
             }
+        }
+
+        if (!ditemukan) {
+            System.out.println("╔═════════════════════════════════════╗");
+            System.out.println("║" + RED + "        Karyawan Tidak Terdaftar        " + RESET + "║");
+            System.out.println("╚═════════════════════════════════════╝");
         }
     }
 
