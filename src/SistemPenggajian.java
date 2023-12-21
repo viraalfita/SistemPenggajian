@@ -902,11 +902,16 @@ public class SistemPenggajian {
         System.out.print("Masukkan Bulan (MM)    : ");
         int cariBulan = Integer.parseInt(scan.nextLine());
         if (gajiAkhir != null && !gajiAkhir.isEmpty()) {
-            int indeksTerakhir = historiGaji.size() - 1;
-            Object[] gajiTerbaru = historiGaji.get(indeksTerakhir);
+            boolean slipFound = false;
+    
+            for (int i = historiGaji.size() - 1; i >= 0; i--) {
+                Object[] gajiTerbaru = historiGaji.get(i);
+                int periodeTahun = (int) gajiTerbaru[1];
+                int periodeBulan = (int) gajiTerbaru[2];
+    
+                if (periodeTahun == cariTahun && periodeBulan == cariBulan) {
+                    slipFound = true;
 
-            int periodeTahun = (int) gajiTerbaru[1];
-            int periodeBulan = (int) gajiTerbaru[2];
             int jmlTunjMakan = (int) gajiTerbaru[4];
             int jmlTunjTransport = (int) gajiTerbaru[5];
             int tunjKesehatan = (int) gajiTerbaru[6];
@@ -975,6 +980,8 @@ public class SistemPenggajian {
         System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
         Enter = scan.nextLine();
         clear();
+        }
+        }
     }
 
     public static void tampilkanRiwayatGajiKaryawan(String inputUsernameKaryawan) {
