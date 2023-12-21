@@ -73,12 +73,14 @@ public class SistemPenggajian {
                         slipGaji();
                         break;
                     case "5":
-                        tampilkanRiwayatGaji();
+                        laporanGajiKaryawan();
                         break;
                     case "6":
-                        clear();
-                        return -1; // Keluar ke fungsi main
+                        tampilkanRiwayatGaji();
                     case "7":
+                        clear();
+                        return -1;
+                    case "8":
                         keluarProgram();
                         break;
                     default:
@@ -86,7 +88,7 @@ public class SistemPenggajian {
                         break;
                 }
 
-                if (pilihMenu.equals("7")) {
+                if (pilihMenu.equals("8")) {
                     return 0; // Keluar ke fungsi main
                 }
             }
@@ -224,9 +226,10 @@ public class SistemPenggajian {
         System.out.println("2. Cari Data Karyawan");
         System.out.println("3. Hitung Gaji Karyawan");
         System.out.println("4. Slip Gaji");
-        System.out.println("5. Riwayat Gaji Karyawan");
-        System.out.println("6. Log out");
-        System.out.println("7. Keluar");
+        System.out.println("5. Laporan Semua Karyawan");
+        System.out.println("6. Riwayat Gaji Karyawan");
+        System.out.println("7. Log out");
+        System.out.println("8. Keluar");
         System.out.print("Pilih menu : ");
         String pilihMenu = scan.nextLine();
         System.out.println();
@@ -967,6 +970,86 @@ public class SistemPenggajian {
                 System.out.println();
             }
         }
+
+        System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
+        Enter = scan.nextLine();
+        clear();
+    }
+
+    public static void laporanGajiKaryawan() {
+        clear();
+        System.out.printf("%55s╔══════════════════════════════════════╗%n", "");
+        System.out.printf("%55s║" + GREEN + "         LAPORAN GAJI KARYAWAN        " + RESET +
+                "║%n", "");
+        System.out.printf("%55s╚══════════════════════════════════════╝%n", "");
+
+        System.out.printf("%55sMasukkan Tahun (YYYY) : ", "");
+        int cariTahun = Integer.parseInt(scan.nextLine());
+
+        System.out.printf("%55sMasukkan Bulan (MM)   : ", "");
+        int cariBulan = Integer.parseInt(scan.nextLine());
+
+        System.out.println(
+                "╔═════════════╦═══════════╦══════════════╦════════════╦══════════╦══════════╦══════════╦══════════╦══════════╦════════════╦══════════╦══════════╦═══════════╦═══════════╗");
+        System.out.printf(
+                "║%-12s ║%-10s ║%-13s ║%-11s ║%-9s ║%-9s ║%-9s ║%-9s ║%-9s ║%-11s ║%-10s║%-9s ║%-10s ║%-11s║%n",
+                "Nama", "NIP", "Jabatan", "Gaji Pokok", "Lembur", "Makan", "Transport",
+                "Kesehatan", "Keluarga",
+                "Pendapatan", "Sanksi", "Pajak", "Potongan", "Gaji Bersih");
+        System.out.println(
+                "╠═════════════╬═══════════╬══════════════╬════════════╬══════════╬══════════╬══════════╬══════════╬══════════╬════════════╬══════════╬══════════╬═══════════╬═══════════╣");
+        boolean found = false;
+
+        for (int i = 0; i < jumlahKaryawan; i++) {
+            found = false; // Reset the flag for each employee
+
+            for (Object[] periodeGaji : historiGaji) {
+                String nama = dataKaryawan[i][0]; // nama
+
+                // Check if the year and month match the desired period
+                if (periodeGaji[0].equals(nama) && (int) periodeGaji[1] == cariTahun
+                        && (int) periodeGaji[2] == cariBulan) {
+                    found = true;
+
+                    String idKaryawan = dataKaryawan[i][1]; // NIP
+                    String divisi = tampilkanDivisi(i); // Jabatan
+                    int jmlTunjMakan = (int) periodeGaji[4]; // makan
+                    int jmlTunjTransport = (int) periodeGaji[5]; // transportasi
+                    int tunjKesehatan = (int) periodeGaji[6]; // kesehatan
+                    int tunjKeluarga = (int) periodeGaji[7]; // keluarga
+                    int jmlGajiPokok = (int) periodeGaji[11]; // gaji pokok
+                    int jmlGajiLembur = (int) periodeGaji[12]; // lembur
+
+                    // Calculate pendapatan
+                    int pendapatan = jmlGajiPokok + jmlGajiLembur + jmlTunjMakan +
+                            jmlTunjTransport
+                            + tunjKeluarga + tunjKesehatan;
+
+                    // Calculate potongan
+                    int jmlTerlambat = (int) periodeGaji[9];
+                    int jmlAlpa = (int) periodeGaji[10];
+                    int potonganPajak = (int) periodeGaji[14];
+                    int potongan = jmlTerlambat + jmlAlpa + potonganPajak;
+
+                    // Calculate sanksi
+                    int sanksi = jmlTerlambat + jmlAlpa;
+
+                    // Calculate gajiSetelahPajak
+                    int gajiSetelahPajak = (int) periodeGaji[13];
+                    System.out.printf(
+                            "║%-12s ║%-10s ║%-13s ║%-11s ║%-9s ║%-9s ║%-9s ║%-9s ║%-9s ║%-11s ║%-10s║%-9s ║%-10s ║%-11s║%n",
+                            nama, idKaryawan, divisi, jmlGajiPokok, jmlGajiLembur, jmlTunjMakan, jmlTunjTransport,
+                            tunjKesehatan, tunjKeluarga, pendapatan, sanksi, potonganPajak, potongan, gajiSetelahPajak);
+
+                }
+            }
+        }
+        System.out.println(
+                "╚═════════════╩═══════════╩══════════════╩════════════╩══════════╩══════════╩══════════╩══════════╩══════════╩════════════╩══════════╩══════════╩═══════════╩═══════════╝");
+
+        System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
+        Enter = scan.nextLine();
+        clear();
     }
 
     public static void tampilkanRiwayatGajiKaryawan(String inputUsernameKaryawan) {
