@@ -432,10 +432,12 @@ public class SistemPenggajian {
         }
 
         if (!ditemukan) {
-            System.out.println("╔═════════════════════════════════════╗");
-            System.out.println("║" + RED + "        Karyawan Tidak Terdaftar        " + RESET + "║");
-            System.out.println("╚═════════════════════════════════════╝");
+            System.out.println("\nKaryawan dengan nama " + cariNama + " tidak ditemukan.");
+            System.out.println();
         }
+        System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
+        Enter = scan.nextLine();
+        clear();
 
     }
 
@@ -474,10 +476,12 @@ public class SistemPenggajian {
         }
 
         if (!ditemukan) {
-            System.out.println("╔═════════════════════════════════════╗");
-            System.out.println("║" + RED + "        Karyawan Tidak Terdaftar        " + RESET + "║");
-            System.out.println("╚═════════════════════════════════════╝");
+            System.out.println("\nKaryawan dengan nama " + cariNama + " tidak ditemukan.");
+            System.out.println();
         }
+        System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
+        Enter = scan.nextLine();
+        clear();
     }
 
     public static void tampilkanDataKaryawan() {
