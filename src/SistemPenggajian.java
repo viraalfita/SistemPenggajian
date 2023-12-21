@@ -876,6 +876,9 @@ public class SistemPenggajian {
     }
 
     public static void slipGajiKaryawan(String gajiAkhir, int j, String inputUsername) {
+
+        String Username = dataKaryawan[j][0];
+
         System.out.print("Masukkan Tahun (YYYY)  : ");
         int cariTahun = Integer.parseInt(scan.nextLine());
 
@@ -884,14 +887,14 @@ public class SistemPenggajian {
 
         boolean ditemukan = false;
         for (int i = 0; i < jumlahKaryawan; i++) {
-            if (dataKaryawan[j][0].equalsIgnoreCase(inputUsername)) {
+            if (dataKaryawan[j][0].equalsIgnoreCase(Username)) {
                 ditemukan = true;
-                System.out.println("\nKaryawan dengan nama " + inputUsername + " ditemukan:");
+                System.out.println("\nKaryawan dengan nama " + Username + " ditemukan:");
 
                 // Cari informasi gaji untuk periode yang diminta
                 Object[] gajiTerbaru = null;
                 for (Object[] periodeGaji : historiGaji) {
-                    if (periodeGaji[0].equals(inputUsername) && (int) periodeGaji[1] == cariTahun
+                    if (periodeGaji[0].equals(Username) && (int) periodeGaji[1] == cariTahun
                             && (int) periodeGaji[2] == cariBulan) {
                         gajiTerbaru = periodeGaji;
                         break;
@@ -956,7 +959,7 @@ public class SistemPenggajian {
                             "╚════════════════════════════════════════════════════════════════════════════════════════════╝%n");
                 } else {
                     System.out.println("═══════════════════════════════════");
-                    System.out.println("   Karyawan " + inputUsername + " Belum Gajian   ");
+                    System.out.println("   Karyawan " + Username + " Belum Gajian   ");
                     System.out.println("═══════════════════════════════════");
                 }
                 System.out.println();
@@ -967,7 +970,7 @@ public class SistemPenggajian {
 
         if (!ditemukan) {
             if (!ditemukan) {
-                System.out.println("\nKaryawan dengan nama " + inputUsername + " tidak ditemukan.");
+                System.out.println("\nKaryawan dengan nama " + Username + " tidak ditemukan.");
                 System.out.println();
             }
         }
