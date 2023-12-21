@@ -173,7 +173,7 @@ public class SistemPenggajian {
 
                                 switch (pilihMenu) {
                                     case 1:
-                                        slipGajiKaryawan(gajiAkhir, j);
+                                        slipGajiKaryawan(gajiAkhir, j, inputUsernameKaryawan);
                                         break;
                                     case 2:
                                         tampilkanRiwayatGajiKaryawan(inputUsernameKaryawan);
@@ -623,53 +623,48 @@ public class SistemPenggajian {
                     int gajiSetelahPajak = (int) gajiTerbaru[13];
                     int potonganPajak = (int) gajiTerbaru[14];
                     String indexDivisi = tampilkanDivisi(j);
-                    for (Object[] periodeGaji : historiGaji) {
-                        if (periodeGaji[0].equals(cariNama) && (int) gajiTerbaru[1] == cariTahun
-                                && (int) gajiTerbaru[2] == cariBulan) {
 
-                            // Informasi gaji sesuai dengan periode yang dimasukkan
-                            System.out.printf(
-                                    "╔════════════════════════════════════════════════════════════════════════════════════════════╗%n");
-                            System.out.printf("║%37sSLIP GAJI KARYAWAN%37s║%n", "", "");
-                            System.out.printf(
-                                    "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
-                            System.out.printf("║ Nama Karyawan : %-32s Periode : %-31s ║%n", dataKaryawan[j][0],
-                                    periodeBulan + "/" + periodeTahun);
-                            System.out.printf("║ ID Karyawan   : %-32s Email   : %-31s ║%n", dataKaryawan[j][1],
-                                    dataKaryawan[j][3]);
-                            System.out.printf("║ Jabatan       : %-32s Alamat  : %-31s ║%n",
-                                    indexDivisi,
-                                    dataKaryawan[j][4]);
-                            System.out.printf(
-                                    "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
-                            System.out.printf("║ Pendapatan :%32s Potongan :%35s ║%n", "", "");
-                            System.out.printf(
-                                    "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
-                            System.out.printf("║ Gaji Pokok   : %-29s║ TerLambat    : %-30s║%n",
-                                    formatRupiah.format(jmlGajiPokok), formatRupiah.format(jmlTerlambat));
-                            System.out.printf("║ Lembur       : %-29s║ Alfa         : %-30s║%n",
-                                    formatRupiah.format(jmlGajiLembur), formatRupiah.format(jmlAlpa));
-                            System.out.printf(
-                                    "║ Tunjangan                                   ║ PPH 21       : %-30s║%n",
-                                    formatRupiah.format(potonganPajak));
-                            System.out.printf("║ Makan        : %-29s║%46s║%n", formatRupiah.format(jmlTunjMakan), "");
-                            System.out.printf("║ Transportasi : %-29s║%46s║%n", formatRupiah.format(jmlTunjTransport),
-                                    "");
-                            System.out.printf("║ Kesehatan    : %-29s║%46s║%n", formatRupiah.format(tunjKesehatan), "");
-                            System.out.printf("║ Keluarga     : %-29s║%46s║%n", formatRupiah.format(tunjKeluarga), "");
+                    // Informasi gaji sesuai dengan periode yang dimasukkan
+                    System.out.printf(
+                            "╔════════════════════════════════════════════════════════════════════════════════════════════╗%n");
+                    System.out.printf("║%37sSLIP GAJI KARYAWAN%37s║%n", "", "");
+                    System.out.printf(
+                            "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
+                    System.out.printf("║ Nama Karyawan : %-32s Periode : %-31s ║%n", dataKaryawan[j][0],
+                            periodeBulan + "/" + periodeTahun);
+                    System.out.printf("║ ID Karyawan   : %-32s Email   : %-31s ║%n", dataKaryawan[j][1],
+                            dataKaryawan[j][3]);
+                    System.out.printf("║ Jabatan       : %-32s Alamat  : %-31s ║%n",
+                            indexDivisi,
+                            dataKaryawan[j][4]);
+                    System.out.printf(
+                            "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
+                    System.out.printf("║ Pendapatan :%32s Potongan :%35s ║%n", "", "");
+                    System.out.printf(
+                            "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
+                    System.out.printf("║ Gaji Pokok   : %-29s║ TerLambat    : %-30s║%n",
+                            formatRupiah.format(jmlGajiPokok), formatRupiah.format(jmlTerlambat));
+                    System.out.printf("║ Lembur       : %-29s║ Alfa         : %-30s║%n",
+                            formatRupiah.format(jmlGajiLembur), formatRupiah.format(jmlAlpa));
+                    System.out.printf(
+                            "║ Tunjangan                                   ║ PPH 21       : %-30s║%n",
+                            formatRupiah.format(potonganPajak));
+                    System.out.printf("║ Makan        : %-29s║%46s║%n", formatRupiah.format(jmlTunjMakan), "");
+                    System.out.printf("║ Transportasi : %-29s║%46s║%n", formatRupiah.format(jmlTunjTransport),
+                            "");
+                    System.out.printf("║ Kesehatan    : %-29s║%46s║%n", formatRupiah.format(tunjKesehatan), "");
+                    System.out.printf("║ Keluarga     : %-29s║%46s║%n", formatRupiah.format(tunjKeluarga), "");
 
-                            System.out.printf("║%-45s║%46s║%n", "", "");
-                            System.out.printf("║ Total Pendapatan : %-25s║ Total Potongan : %-27s ║%n",
-                                    formatRupiah.format(jmlGajiPokok + jmlGajiLembur + jmlTunjMakan + jmlTunjTransport
-                                            + tunjKeluarga + tunjKesehatan),
-                                    formatRupiah.format(jmlTerlambat + jmlAlpa + potonganPajak));
-                            System.out.printf(
-                                    "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
-                            System.out.printf("║ Gaji Diterima   : %-73s║%n", formatRupiah.format(gajiSetelahPajak));
-                            System.out.printf(
-                                    "╚════════════════════════════════════════════════════════════════════════════════════════════╝%n");
-                        }
-                    }
+                    System.out.printf("║%-45s║%46s║%n", "", "");
+                    System.out.printf("║ Total Pendapatan : %-25s║ Total Potongan : %-27s ║%n",
+                            formatRupiah.format(jmlGajiPokok + jmlGajiLembur + jmlTunjMakan + jmlTunjTransport
+                                    + tunjKeluarga + tunjKesehatan),
+                            formatRupiah.format(jmlTerlambat + jmlAlpa + potonganPajak));
+                    System.out.printf(
+                            "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
+                    System.out.printf("║ Gaji Diterima   : %-73s║%n", formatRupiah.format(gajiSetelahPajak));
+                    System.out.printf(
+                            "╚════════════════════════════════════════════════════════════════════════════════════════════╝%n");
                 } else {
                     System.out.println("═══════════════════════════════════");
                     System.out.println("   Karyawan " + cariNama + " Belum Gajian   ");
@@ -876,86 +871,102 @@ public class SistemPenggajian {
         return dataKaryawan;
     }
 
-    public static void slipGajiKaryawan(String gajiAkhir, int j) {
+    public static void slipGajiKaryawan(String gajiAkhir, int j, String inputUsername) {
         System.out.print("Masukkan Tahun (YYYY)  : ");
         int cariTahun = Integer.parseInt(scan.nextLine());
 
         System.out.print("Masukkan Bulan (MM)    : ");
         int cariBulan = Integer.parseInt(scan.nextLine());
-        if (gajiAkhir != null && !gajiAkhir.isEmpty()) {
-            int indeksTerakhir = historiGaji.size() - 1;
-            Object[] gajiTerbaru = historiGaji.get(indeksTerakhir);
 
-            int periodeTahun = (int) gajiTerbaru[1];
-            int periodeBulan = (int) gajiTerbaru[2];
-            int jmlTunjMakan = (int) gajiTerbaru[4];
-            int jmlTunjTransport = (int) gajiTerbaru[5];
-            int tunjKesehatan = (int) gajiTerbaru[6];
-            int tunjKeluarga = (int) gajiTerbaru[7];
-            int jmlTerlambat = (int) gajiTerbaru[9];
-            int jmlAlpa = (int) gajiTerbaru[10];
-            int jmlGajiPokok = (int) gajiTerbaru[11];
-            int jmlGajiLembur = (int) gajiTerbaru[12];
-            int gajiSetelahPajak = (int) gajiTerbaru[13];
-            int potonganPajak = (int) gajiTerbaru[14];
-            String indexDivisi = tampilkanDivisi(j);
+        boolean ditemukan = false;
+        for (int i = 0; i < jumlahKaryawan; i++) {
+            if (dataKaryawan[j][0].equalsIgnoreCase(inputUsername)) {
+                ditemukan = true;
+                System.out.println("\nKaryawan dengan nama " + inputUsername + " ditemukan:");
 
-            if ((int) gajiTerbaru[1] == cariTahun && (int) gajiTerbaru[2] == cariBulan) {
-                System.out.printf(
-                        "%15s╔════════════════════════════════════════════════════════════════════════════════════════════╗%n",
-                        "");
-                System.out.printf("%15s║%37sSLIP GAJI KARYAWAN%37s║%n", "", "", "");
-                System.out.printf(
-                        "%15s╠════════════════════════════════════════════════════════════════════════════════════════════╣%n",
-                        "");
-                System.out.printf("%15s║ Nama Karyawan : %-32s Periode : %-31s ║%n", "", dataKaryawan[j][0],
-                        periodeBulan + "/" + periodeTahun);
-                System.out.printf("%15s║ ID Karyawan   : %-32s Email   : %-31s ║%n", "", dataKaryawan[j][1],
-                        dataKaryawan[j][3]);
-                System.out.printf("%15s║ Jabatan       : %-32s Alamat  : %-31s ║%n", "",
-                        indexDivisi,
-                        dataKaryawan[j][4]);
-                System.out.printf(
-                        "%15s╠════════════════════════════════════════════════════════════════════════════════════════════╣%n",
-                        "");
-                System.out.printf("%15s║ Pendapatan :%32s Potongan :%35s ║%n", "", "", "");
-                System.out.printf(
-                        "%15s╠════════════════════════════════════════════════════════════════════════════════════════════╣%n",
-                        "");
-                System.out.printf("%15s║ Gaji Pokok   : %-29s║ TerLambat    : %-30s║%n", "",
-                        formatRupiah.format(jmlGajiPokok), formatRupiah.format(jmlTerlambat));
-                System.out.printf("%15s║ Lembur       : %-29s║ Alfa         : %-30s║%n", "",
-                        formatRupiah.format(jmlGajiLembur), formatRupiah.format(jmlAlpa));
-                System.out.printf(
-                        "%15s║ Tunjangan                                   ║ PPH 21       : %-30s║%n", "",
-                        formatRupiah.format(potonganPajak));
-                System.out.printf("%15s║ Makan        : %-29s║%46s║%n", "", formatRupiah.format(jmlTunjMakan), "");
-                System.out.printf("%15s║ Transportasi : %-29s║%46s║%n", "", formatRupiah.format(jmlTunjTransport), "");
-                System.out.printf("%15s║ Kesehatan    : %-29s║%46s║%n", "", formatRupiah.format(tunjKesehatan), "");
-                System.out.printf("%15s║ Keluarga     : %-29s║%46s║%n", "", formatRupiah.format(tunjKeluarga), "");
+                // Cari informasi gaji untuk periode yang diminta
+                Object[] gajiTerbaru = null;
+                for (Object[] periodeGaji : historiGaji) {
+                    if (periodeGaji[0].equals(inputUsername) && (int) periodeGaji[1] == cariTahun
+                            && (int) periodeGaji[2] == cariBulan) {
+                        gajiTerbaru = periodeGaji;
+                        break;
+                    }
+                }
 
-                System.out.printf("%15s║%-45s║%46s║%n", "", "", "");
-                System.out.printf("%15s║ Total Pendapatan : %-25s║ Total Potongan : %-27s ║%n", "",
-                        formatRupiah.format(jmlGajiPokok + jmlGajiLembur + jmlTunjMakan + jmlTunjTransport
-                                + tunjKeluarga + tunjKesehatan),
-                        formatRupiah.format(jmlTerlambat + jmlAlpa + potonganPajak));
-                System.out.printf(
-                        "%15s╠════════════════════════════════════════════════════════════════════════════════════════════╣%n",
-                        "");
-                System.out.printf("%15s║ Gaji Diterima   : %-73s║%n", "",
-                        formatRupiah.format(gajiSetelahPajak));
-                System.out.printf(
-                        "%15s╚════════════════════════════════════════════════════════════════════════════════════════════╝%n",
-                        "");
+                if (gajiTerbaru != null) {
+                    int periodeTahun = (int) gajiTerbaru[1];
+                    int periodeBulan = (int) gajiTerbaru[2];
+                    int jmlTunjMakan = (int) gajiTerbaru[4];
+                    int jmlTunjTransport = (int) gajiTerbaru[5];
+                    int tunjKesehatan = (int) gajiTerbaru[6];
+                    int tunjKeluarga = (int) gajiTerbaru[7];
+                    int jmlTerlambat = (int) gajiTerbaru[9];
+                    int jmlAlpa = (int) gajiTerbaru[10];
+                    int jmlGajiPokok = (int) gajiTerbaru[11];
+                    int jmlGajiLembur = (int) gajiTerbaru[12];
+                    int gajiSetelahPajak = (int) gajiTerbaru[13];
+                    int potonganPajak = (int) gajiTerbaru[14];
+                    String indexDivisi = tampilkanDivisi(j);
+
+                    // Informasi gaji sesuai dengan periode yang dimasukkan
+                    System.out.printf(
+                            "╔════════════════════════════════════════════════════════════════════════════════════════════╗%n");
+                    System.out.printf("║%37sSLIP GAJI KARYAWAN%37s║%n", "", "");
+                    System.out.printf(
+                            "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
+                    System.out.printf("║ Nama Karyawan : %-32s Periode : %-31s ║%n", dataKaryawan[j][0],
+                            periodeBulan + "/" + periodeTahun);
+                    System.out.printf("║ ID Karyawan   : %-32s Email   : %-31s ║%n", dataKaryawan[j][1],
+                            dataKaryawan[j][3]);
+                    System.out.printf("║ Jabatan       : %-32s Alamat  : %-31s ║%n",
+                            indexDivisi,
+                            dataKaryawan[j][4]);
+                    System.out.printf(
+                            "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
+                    System.out.printf("║ Pendapatan :%32s Potongan :%35s ║%n", "", "");
+                    System.out.printf(
+                            "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
+                    System.out.printf("║ Gaji Pokok   : %-29s║ TerLambat    : %-30s║%n",
+                            formatRupiah.format(jmlGajiPokok), formatRupiah.format(jmlTerlambat));
+                    System.out.printf("║ Lembur       : %-29s║ Alfa         : %-30s║%n",
+                            formatRupiah.format(jmlGajiLembur), formatRupiah.format(jmlAlpa));
+                    System.out.printf(
+                            "║ Tunjangan                                   ║ PPH 21       : %-30s║%n",
+                            formatRupiah.format(potonganPajak));
+                    System.out.printf("║ Makan        : %-29s║%46s║%n", formatRupiah.format(jmlTunjMakan), "");
+                    System.out.printf("║ Transportasi : %-29s║%46s║%n", formatRupiah.format(jmlTunjTransport),
+                            "");
+                    System.out.printf("║ Kesehatan    : %-29s║%46s║%n", formatRupiah.format(tunjKesehatan), "");
+                    System.out.printf("║ Keluarga     : %-29s║%46s║%n", formatRupiah.format(tunjKeluarga), "");
+
+                    System.out.printf("║%-45s║%46s║%n", "", "");
+                    System.out.printf("║ Total Pendapatan : %-25s║ Total Potongan : %-27s ║%n",
+                            formatRupiah.format(jmlGajiPokok + jmlGajiLembur + jmlTunjMakan + jmlTunjTransport
+                                    + tunjKeluarga + tunjKesehatan),
+                            formatRupiah.format(jmlTerlambat + jmlAlpa + potonganPajak));
+                    System.out.printf(
+                            "╠════════════════════════════════════════════════════════════════════════════════════════════╣%n");
+                    System.out.printf("║ Gaji Diterima   : %-73s║%n", formatRupiah.format(gajiSetelahPajak));
+                    System.out.printf(
+                            "╚════════════════════════════════════════════════════════════════════════════════════════════╝%n");
+                } else {
+                    System.out.println("═══════════════════════════════════");
+                    System.out.println("   Karyawan " + inputUsername + " Belum Gajian   ");
+                    System.out.println("═══════════════════════════════════");
+                }
+                System.out.println();
+
+                break;
             }
-        } else {
-            System.out.println("╔══════════════════════════════╗");
-            System.out.println("║     Anda Belum Gajian !!!    ║");
-            System.out.println("╚══════════════════════════════╝");
         }
-        System.out.print(YELLOW + "Enter untuk melanjutkan" + RESET);
-        Enter = scan.nextLine();
-        clear();
+
+        if (!ditemukan) {
+            if (!ditemukan) {
+                System.out.println("\nKaryawan dengan nama " + inputUsername + " tidak ditemukan.");
+                System.out.println();
+            }
+        }
     }
 
     public static void tampilkanRiwayatGajiKaryawan(String inputUsernameKaryawan) {
